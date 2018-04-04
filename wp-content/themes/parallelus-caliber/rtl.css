@@ -1,0 +1,15 @@
+/*
+Theme Name: Caliber
+
+Adding support for language written in a Right To Left (RTL) direction. If some elements are not
+displaying in the correct direction, add them to this file so they can overwriting the horizontal
+positioning attributes for each element.
+
+http://codex.wordpress.org/Right_to_Left_Language_Support
+*/
+
+
+body {
+	direction: rtl;
+	unicode-bidi: embed;
+}

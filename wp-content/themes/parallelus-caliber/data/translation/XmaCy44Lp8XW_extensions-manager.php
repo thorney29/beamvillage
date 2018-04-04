@@ -1,0 +1,39 @@
+<?php 
+// Translation strings
+__('f', 'framework');
+__('b', 'framework');
+__('i', 'framework');
+__('j', 'framework');
+__('c', 'framework');
+__('p', 'framework');
+__('s', 'framework');
+__('t', 'framework');
+__('d', 'framework');
+__('f', 'framework');
+__('b', 'framework');
+__('i', 'framework');
+__('j', 'framework');
+__('c', 'framework');
+__('p', 'framework');
+__('s', 'framework');
+__('t', 'framework');
+__('d', 'framework');
+__('f', 'framework');
+__('b', 'framework');
+__('i', 'framework');
+__('j', 'framework');
+__('c', 'framework');
+__('p', 'framework');
+__('s', 'framework');
+__('t', 'framework');
+__('d', 'framework');
+__('f', 'framework');
+__('b', 'framework');
+__('i', 'framework');
+__('j', 'framework');
+__('c', 'framework');
+__('p', 'framework');
+__('s', 'framework');
+__('t', 'framework');
+__('d', 'framework');
+?>

@@ -1,0 +1,5518 @@
+// ============================================================================
+//
+// This file contains styling to add, modify and extend the default Bootstrap
+// CSS/LESS specific to this template design.
+//
+// The file "variables.less" contains the colors, fonts, spacing and other core
+// element styling. Changes should be made there first as those variables are
+// used throughout this file.
+//
+// ============================================================================
+
+body {
+	word-wrap: break-word;
+}
+
+/* Header ===================================================================*/
+
+#header,
+.navbar-wrapper + #middle { // extend top margin to #middle when no #header exists
+	margin-top: @navbar-top-min-height;
+	background-position: 50%;
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	// Navigation overlay header background
+	body.transparent-nav & {
+		margin-top: 0;
+		padding-top: @navbar-top-min-height;
+	}
+
+	@media (min-width: @navbar-breakpoint) {
+		margin-top: @navbar-height;
+		.transition(~'margin 0.5s ease 0s, padding 0.5s ease 0s');
+
+		// Sticky navigation on scroll
+		body.shrink-nav & {
+			margin-top: @shrink-navbar-height;
+		}
+
+		// Navigation overlay header background
+		body.transparent-nav & {
+			margin-top: 0;
+			padding-top: @navbar-height;
+		}
+		/*body.shrink-nav.transparent-nav & {
+			padding-top: @shrink-navbar-height;
+		}*/
+	}
+}
+
+#header.masthead,
+.masthead {
+	position: relative;
+	background-color: transparent;
+
+	h1,
+	.h1 {
+		font-weight: 200;
+	}
+
+	// .masthead-auto = no padding wrapper when auto-size to content is used
+	&-auto > .section-wrapper {
+		padding-top: 1px;
+		padding-bottom: 1px;
+	}
+
+	// Vertical align header content to middle & bottom
+	&.bottom-align > .section-wrapper,
+	&.middle-align > .section-wrapper {
+		display: table;
+		width: 100%;
+
+		> div[class*="container"] {
+			display: table-cell;
+			vertical-align: middle;
+		}
+	}
+
+	&.bottom-align > .section-wrapper > div[class*="container"] {
+		vertical-align: bottom;
+	}
+
+	@media (min-width: @screen-lg-min) {
+		// &,
+		&-small {
+
+			&.middle-align > .section-wrapper {
+				padding-bottom: 65px;
+			}
+
+			&.bottom-align > .section-wrapper {
+				padding-top: 65px;
+			}
+		}
+
+		&-medium {
+
+			&.middle-align > .section-wrapper {
+				padding-bottom: 115px;
+			}
+
+			&.bottom-align > .section-wrapper {
+				padding-top: 115px;
+			}
+		}
+
+		&-full,
+		&-xl,
+		&-large {
+
+			&.middle-align > .section-wrapper {
+				padding-bottom: 165px;
+			}
+
+			&.bottom-align > .section-wrapper {
+				padding-top: 165px;
+			}
+		}
+	}
+
+	// Masthead Heights (tiny screens)
+	&-full { // .masthead-full
+		min-height: 100px;
+		height: 100vh;
+		.transition(~'height .3s ease 0s, min-height 0.3s ease 0s, padding .5s ease 0s, margin .5s ease 0s');
+
+		> .section-wrapper {
+			height: 100%;
+		}
+	}
+
+	&-xl { // .masthead-xl
+		min-height: 380px;
+	}
+
+	&-large { // .masthead-large
+		min-height: 270px;
+	}
+
+	&-medium { // .masthead-medium
+		min-height: 150px;
+
+		> .section-wrapper {
+			padding-top: @grid-gutter-width;
+			padding-bottom: @grid-gutter-width;
+		}
+	}
+
+	&-small { // .masthead-small
+		min-height: 120px;
+
+		> .section-wrapper {
+			padding-top: (@grid-gutter-width / 2);
+			padding-bottom: (@grid-gutter-width / 2);
+		}
+	}
+
+	// (medium screens)
+	@media (min-width: @grid-float-breakpoint) {
+
+		// .masthead-xl
+		&-xl {
+			min-height: 660px;
+
+			&.bottom-align > .section-wrapper,
+			&.middle-align > .section-wrapper {
+
+				> div[class*="container"] {
+					min-height: 494px;
+					height: 494px;
+				}
+			}
+		}
+		// .masthead-large
+		&-large {
+			min-height: 460px;
+
+			&.bottom-align > .section-wrapper,
+			&.middle-align > .section-wrapper {
+
+				> div[class*="container"] {
+					min-height: 294px;
+					height: 294px;
+				}
+			}
+		}
+		// .masthead-medium
+		&-medium {
+			min-height: 360px;
+
+			&.bottom-align > .section-wrapper,
+			&.middle-align > .section-wrapper {
+
+				> div[class*="container"] {
+					min-height: 194px;
+					height: 194px;
+				}
+			}
+		}
+		// .masthead-small
+		&-small {
+			min-height: 189px; // 260px;
+
+			&.bottom-align > .section-wrapper,
+			&.middle-align > .section-wrapper {
+
+				> div[class*="container"] {
+					min-height: 99px;
+					height: 99px;
+				}
+			}
+		}
+	}
+
+	// (large screens)
+	@media (min-width: @screen-lg-min) {
+		// These heights are the same as @grid-float-breakpoint + 100.
+		// Padding on container goes from 50 to 100 at medium screen size.
+
+		// .masthead-xl
+		&-xl {
+			min-height: 760px;
+		}
+		// .masthead-large
+		&-large {
+			min-height: 560px;
+		}
+	}
+
+	// Post content container WITHOUT Author avatar
+	body.single-format-standard &:not([class*='show-author']) + #middle > .section-wrapper:first-child {
+		padding-top: ceil(@jumbotron-padding / 2);
+
+		// Extra large screens
+		@media (min-width: 1300px) {
+			padding-top: 72px;
+		}
+	}
+
+	// Post content container WITH Author avatar
+	body.single-format-standard &.show-author + #middle > .section-wrapper:first-child {
+		padding-top: 72px;
+
+		// Extra large screens
+		@media (min-width: 1300px) {
+			padding-top: @jumbotron-padding;
+		}
+	}
+}
+
+/* Middle ===================================================================*/
+
+#middle {
+	background: #fff;
+
+	// remove footer margin when bordering a .section-wrapper
+	& > .section-wrapper:last-child,
+	& > *:not([class*='section-wrapper']):last-child {
+		display: block;
+		margin-bottom: -(@jumbotron-padding * .5);
+
+		@media (min-width: @grid-float-breakpoint) {
+			margin-bottom: -@jumbotron-padding;
+		}
+	}
+}
+
+/* Footer ===================================================================*/
+
+#footer {
+	background-color: @gray-darker;
+	color: @gray;
+	font-size: (@font-size-base - 1);
+	margin-top: (@jumbotron-padding * .5);
+	padding-top: @grid-gutter-width;
+	padding-bottom: floor(@grid-gutter-width * .8);
+
+	@media (min-width: @grid-float-breakpoint) {
+		margin-top: @jumbotron-padding;
+	}
+
+	@media (min-width: @screen-lg-min) {
+		padding-top: @jumbotron-padding;
+		padding-bottom: floor(@jumbotron-padding * .8);
+	}
+
+	h1, h2, h3, h4, h5, h6,
+	.h1, .h2, .h3, .h4, .h5, .h6 {
+		color: @gray-lighter;
+		font-weight: 400;
+	}
+
+	a {
+		color: @gray-light;
+
+		&:hover,
+		&:active {
+			color: @gray-lighter;
+		}
+	}
+}
+
+/* Boxed Style ==============================================================*/
+
+body.boxed {
+	background-color: darken(@gray-lighter, 4.5%);
+
+	@media (min-width: @screen-md-min) {
+		margin-left: 3%;
+		margin-right: 3%;
+		padding-top: 32px;
+		padding-bottom: 32px;
+	}
+
+	#wrapper {
+		margin: 0 auto;
+		max-width: 1366px;
+		border: 1px solid darken(@gray-lighter, 10%);
+		background: #fff;
+		overflow-x: hidden; // helps with flush left/right elements getting 1px gaps on edges
+	}
+
+	#header {
+		margin-top: 0;
+		padding-top: 0;
+
+	}
+
+	// Navbar
+	.navbar-wrapper {
+
+		.navbar {
+			margin-top: 0;
+		}
+
+		+ #middle {
+			margin-top: 0;
+			.transition(none);
+		}
+	}
+
+	&.shrink-nav {
+
+		.navbar-wrapper + #middle,
+		#header {
+			margin-top: 0;
+			.transition(none);
+		}
+	}
+}
+
+/* Navbar ===================================================================*/
+
+// Dropdown base values
+.dropdown-menu {
+	padding: 0;
+	margin-top: 0;
+	font-size: @font-size-small;
+
+	> li > a {
+		padding: @nav-link-padding;
+	}
+}
+
+// Wrapper for header navbar
+.navbar-wrapper {
+
+	.navbar {
+
+		// Large screens only
+		@media (min-width: @navbar-breakpoint) {
+			margin-top: 20px;
+		}
+
+		&-static-top,
+		&.navbar-fixed-top {
+			margin-top: 0;
+			-webkit-transform: translate3d(0,0,0); // prevents jitter during scroll
+			transform: translate3d(0,0,0);
+		}
+	}
+}
+
+// Default navbar styles
+.navbar {
+	min-height: @navbar-top-min-height;
+	text-shadow: none;
+	margin-bottom: 0;
+	.transition(~'color .3s ease 0s, background-color .3s ease 0s, min-height 0.5s ease 0s, background-color 0.5s ease 0s, border-color 0.5s ease 0s');
+
+	body:not([class*='boxed']) & {
+		.transition(~'color .3s ease 0s, background-color .3s ease 0s, min-height 0.5s ease 0s, background-color 0.5s ease 0s, border-color 0.5s ease 0s, box-shadow 0.5s ease 0s');
+	}
+
+	// Bigger brand text
+	&-brand {
+		font-weight: 200;
+		padding: floor((@navbar-top-min-height - 48) / 2) @navbar-padding-horizontal;
+		line-height: 48px; // 34px toggle height is hardcoded in Bootstrap
+		height: auto;
+
+		body:not([class*='boxed']) & {
+			.transition(~'line-height 0.5s ease 0s, padding 0.5s ease 0s, margin 0.5s ease 0s');
+		}
+
+		// Add logo images to brand
+		img {
+			max-height: 48px; // 34px toggle height is hardcoded in Bootstrap
+			width: auto !important;
+			height: auto !important;
+
+			body:not([class*='boxed']) & {
+				.transition(~'height 0.5s ease 0s, max-height 0.5s ease 0s');
+			}
+		}
+
+		&.logo-and-text {
+			max-height: ( (@navbar-top-brand-padding * 2) + @navbar-top-brand-line-height );
+
+			& > img {
+				display: inline-block;
+			}
+		}
+	}
+
+	&-toggle {
+		margin-top: ceil((@navbar-top-min-height - 34) / 2); // 34px toggle height is hardcoded in Bootstrap
+		margin-bottom: floor((@navbar-top-min-height - 34) / 2);
+		border-width: 0;
+		padding: 0; // 8px 5px;
+		height: 34px;
+		line-height: 48px;
+
+		&:active,
+		&:active:focus {
+			outline: none;
+		}
+
+		&.squeeze {
+			transition-property: opacity, -webkit-filter;
+			transition-property: opacity, filter;
+			transition-property: opacity, filter, -webkit-filter;
+			transition-duration: 0.15s;
+			transition-timing-function: linear;
+
+			&:not([class*='collapsed']) .squeeze-inner {
+				-webkit-transform: rotate(45deg);
+			      transform: rotate(45deg);
+				transition-delay: 0.14s;
+				transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+				&:before {
+					top: 0;
+					opacity: 0;
+					transition: top 0.1s ease, opacity 0.1s 0.14s ease;
+				}
+				&:after {
+					bottom: 0;
+					-webkit-transform: rotate(-90deg);
+					        transform: rotate(-90deg);
+					transition: bottom 0.1s ease, -webkit-transform 0.1s 0.14s cubic-bezier(0.215, 0.61, 0.355, 1);
+					transition: bottom 0.1s ease, transform 0.1s 0.14s cubic-bezier(0.215, 0.61, 0.355, 1);
+					transition: bottom 0.1s ease, transform 0.1s 0.14s cubic-bezier(0.215, 0.61, 0.355, 1), -webkit-transform 0.1s 0.14s cubic-bezier(0.215, 0.61, 0.355, 1);
+				}
+			}
+		}
+
+		.squeeze {
+
+			&-box {
+				width: 32px;
+				height: 24px;
+				display: inline-block;
+				position: relative;
+
+				.squeeze-inner {
+					transition-duration: 0.1s;
+					transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+					&:before {
+						transition: top 0.1s 0.14s ease, opacity 0.1s ease;
+					}
+					&:after {
+						transition: bottom 0.1s 0.14s ease, -webkit-transform 0.1s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+						transition: bottom 0.1s 0.14s ease, transform 0.1s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+						transition: bottom 0.1s 0.14s ease, transform 0.1s cubic-bezier(0.55, 0.055, 0.675, 0.19), -webkit-transform 0.1s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+					}
+				}
+			}
+
+			&-inner {
+				display: block;
+				top: 50%;
+				margin-top: -1px;
+
+				&,
+				&:before,
+				&:after {
+					width: 32px;
+					height: 3px;
+					position: absolute;
+					transition-property: -webkit-transform;
+					transition-property: transform;
+					transition-property: transform, -webkit-transform;
+					transition-duration: 0.15s;
+					transition-timing-function: ease;
+				}
+
+				&:before,
+				&:after {
+					content: "";
+					display: block;
+				}
+
+				&:before {
+					top: -9px;
+				}
+
+				&:after {
+					bottom: -9px;
+				}
+			}
+		}
+	}
+
+	@media (max-width: @navbar-breakpoint-max) {
+
+		// Small screens, set all fonts to big
+		font-size: 18px;
+
+		li > .dropdown-menu > li  {
+			> a,
+			> a:focus {
+				font-size: 18px;
+			}
+		}
+
+		// Make the sub-menus background transparent on small screens
+		&-default .navbar-nav .open .dropdown-menu > li >,
+		&-default .dropdown-menu > li > {
+
+			a,
+			a:hover,
+			a:focus {
+				background-color: transparent;
+			}
+		}
+		&-default .dropdown-menu {
+			background-color: transparent;
+		}
+
+		// Space above/below meu in container
+		.navbar-nav {
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		// Remove the gap between left and right menus when collapsed on mobile menu
+		.navbar-nav + .navbar-nav {
+			margin-top: -10px;
+		}
+
+		// Better indenting on responsive menus
+		.navbar-nav .open .dropdown-menu > li {
+			> a {
+				padding-left: 28px;
+			}
+			li {
+				> a {
+					padding-left: 56px;
+				}
+				li {
+					> a {
+						padding-left: 84px;
+					}
+					li {
+						> a {
+							padding-left: 112px;
+						}
+						li {
+							> a {
+								padding-left: 140px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// @media (min-width: @grid-float-breakpoint) {
+	@media (min-width: @navbar-breakpoint) {
+
+		font-size: @font-size-base - 1;
+
+		// Bigger brand text
+		&-brand {
+			font-size: 36px;
+			padding: @navbar-top-brand-padding @navbar-padding-horizontal;
+			line-height: @navbar-top-brand-line-height;
+
+			// Add logo images to brand
+			img {
+				max-height: @navbar-top-brand-line-height;
+			}
+		}
+
+		.navbar-nav {
+
+			& > li,
+			& > li.active,
+			& > li.open {
+				padding-top: @navbar-top-vertical-margin;
+				.transition(~'color .3s ease 0s, background-color .3s ease 0s');
+
+				body:not([class*='boxed']) & {
+					.transition(~'color .3s ease 0s, background-color .3s ease 0s, height 0.5s ease 0s, line-height 0.5s ease 0s, padding 0.5s ease 0s, margin 0.5s ease 0s');
+				}
+
+				> a {
+					background-color: transparent;
+					padding-top: @navbar-top-vertical-padding;
+					padding-bottom: @navbar-top-vertical-padding;
+					.transition(~'color .3s ease 0s, background-color .3s ease 0s');
+
+					body:not([class*='boxed']) & {
+						.transition(~'color .3s ease 0s, background-color .3s ease 0s, line-height 0.5s ease 0s, padding 0.5s ease 0s, margin 0.5s ease 0s');
+					}
+
+					&:hover,
+					&:focus {
+						background-color: transparent;
+					}
+				}
+			}
+
+			& > li.open ul li a {
+				.transition(~'color .3s ease 0s, background-color .3s ease 0s');
+			}
+
+			&.navbar-right:last-child {
+				margin-right: -15px;
+			}
+		}
+	}
+
+	// Responsive menu adjustments
+	.navbar-collapse {
+		border-top-color: @dropdown-divider-bg;
+		.box-shadow(none);
+	}
+
+	// Better vertical positioning on form and input elements
+	&-form {
+		margin-top: ((@navbar-height - @input-height-base) / 2);
+		margin-bottom: ((@navbar-height - @input-height-base) / 2);
+
+		.form-control {
+			border-color: @navbar-default-border;
+			.box-shadow(none);
+
+			&.input-sm {
+				margin-top: ((@input-height-base - @input-height-small) / 2);
+				margin-bottom: ((@input-height-base - @input-height-small) / 2);
+			}
+		}
+	}
+
+	&-btn.btn-xs {
+		margin-top: ((@navbar-height - 25) / 2);
+		margin-bottom: ((@navbar-height - 25) / 2);
+	}
+
+	li > .dropdown {
+
+		&-menu {
+			padding: 0;
+			min-width: 176px;
+
+			@media (min-width: @navbar-breakpoint) {
+				border: 1px solid @dropdown-border;
+				border-radius: @navbar-border-radius; // 5px;
+				border-top-right-radius: 5px;
+				border-top-left-radius: 5px;
+				.box-shadow(0 4px 24px rgba(0,0,0,0.16));
+			}
+
+			// Adjust sub-menu links
+			> li > a,
+			> li > a:focus {
+				background-color: transparent;
+				font-size: 14px; // ceil((@font-size-base * .85)); // ~14px;
+			}
+
+			// Round the corners of first and last menu item to match .dropdown-menu
+			li:first-child > a {
+				border-top-right-radius: 4px;
+				border-top-left-radius: 4px;
+			}
+			li:last-child > a {
+				border-bottom-right-radius: 4px;
+				border-bottom-left-radius: 4px;
+			}
+		}
+	}
+
+	@media (min-width: @navbar-breakpoint) {
+		.shrink-nav & .navbar-nav > li > .dropdown {
+
+			&-menu {
+				border-width: 0 1px 1px;
+				border-top-left-radius: 0px;
+				border-top-right-radius: 0px;
+				.box-shadow(0 12px 20px rgba(0,0,0,0.16));
+
+				> li:first-child > a {
+					border-top-right-radius: 0px;
+					border-top-left-radius: 0px;
+				}
+			}
+		}
+	}
+
+	// Default drop menu styles
+	&-default {
+
+		// Active state menu items
+		.navbar-nav {
+			li.open .dropdown-menu > .active > a,
+			li.open .dropdown-menu > .active > a:focus,
+			> li.open > a,
+			> li.open > a:focus,
+			> li.active > a,
+			> li.active > a:focus {
+				background-color: transparent;
+			}
+		}
+
+		// Default drop-down link colors
+		.dropdown-menu {
+			background-color: #fff; // @navbar-default-bg;
+
+			> li > a,
+			> li > a:focus {
+				color: @navbar-default-link-color;
+
+				// Make sure we set this color for the responsive menu to override another setting
+				@media (max-width: @navbar-breakpoint-max) {
+					color: @navbar-default-link-color;
+				}
+			}
+
+			> .active > a {
+				background-color: transparent;
+			}
+
+			> li > a:hover ,
+			> .active > a:hover {
+				color: @navbar-default-link-hover-color;
+				background-color: @navbar-default-link-hover-bg;
+			}
+		}
+
+		.navbar-toggle {
+
+			.squeeze-inner {
+
+				&,
+				&:before,
+				&:after {
+					background-color: @gray-light;
+				}
+			}
+
+			&,
+			&:hover,
+			&:active {
+				.box-shadow(none);
+			}
+		}
+
+		// Styles for top navigation only, <header id="top" class="navbar navbar-default">
+		.top-nav& {
+			background-color: #fff;
+			border-width: 0;
+		}
+	}
+
+	// Active item in top navigation
+	.top-nav& .navbar-nav > li.active {
+		// large screens
+		@media (min-width: @navbar-breakpoint) {
+			border-top: 4px solid @color-accent-1;
+			padding-top: (@navbar-top-vertical-margin - 4);
+		}
+		// small screens
+		@media (max-width: @navbar-breakpoint-max) {
+
+			> a {
+				border-left: 4px solid @color-accent-1;
+				text-indent: -4px;
+			}
+		}
+	}
+
+	// Inverse menu style
+	&-inverse {
+
+		.dropdown {
+
+			// Sub-menu styles
+			&-menu {
+				background-color: @navbar-inverse-bg;
+
+				> li > a,
+				> li > a:focus {
+					color: @navbar-inverse-link-color;
+				}
+
+				> .active > a {
+					background-color: transparent;
+				}
+
+				> li > a:hover,
+				> .active > a:hover {
+					color: @navbar-inverse-link-hover-color;
+					background-color: @navbar-inverse-link-hover-bg;
+				}
+			}
+
+			// Menu headings style
+			&-header {
+				color: lighten(@navbar-inverse-bg, 50%);
+			}
+		}
+
+		// Form elements in menu
+		.navbar-form .form-control {
+			border-color: @navbar-inverse-border;
+		}
+	}
+
+	// Navigation overlay header background (beofre shrink)
+	body.transparent-nav:not([class*='shrink-nav']) &.top-nav {
+		border-color: transparent;
+		background-color: rgba(255,255,255,0);
+	}
+}
+
+/* Sub-menus ===================================================================*/
+
+// Sub-menu functionality
+.navbar {
+
+	.dropdown {
+
+		// Sub-menu drop downs (multi-level menus)
+		&-submenu {
+			position: relative;
+
+			> a.dropdown-toggle {
+				padding-right: 20px;
+			}
+
+			@media (min-width: @navbar-breakpoint) {
+
+				> a.dropdown-toggle:after,
+				> a.dropdown-toggle:hover:after {
+					position: absolute;
+					border-color: transparent;
+					border-style: solid;
+					border-width: @caret-width-base 0 @caret-width-base @caret-width-base;
+					border-left-color: @navbar-default-link-color;
+					margin: -(@caret-width-base - 1) 2px 0 0;
+					top: 50%;
+					left: auto;
+					right: (@caret-width-base * 2);
+				}
+			}
+
+			> .dropdown-menu {
+				top: 0;
+				left: 100%;
+				right: auto;
+				margin-left: -1px; // offset for clear borders
+				margin-top: -1px;  // offset for top/bottom padding on menu container borders
+			}
+		}
+
+	    // Sub-menu indicators
+	    &-toggle {
+
+			// Hide any caret elements because we
+			.caret {
+				display: none;
+			}
+
+			&:after {
+				position: relative;
+				display: inline-block;
+				content: " ";
+				width: 0;
+				height: 0;
+				border-color: transparent;
+				border-style: solid;
+				border-width: @caret-width-base @caret-width-base 0 @caret-width-base;
+				border-top-color: @navbar-default-link-color;
+				margin: ((@line-height-computed - @caret-width-base) / 2) 0 0 @caret-width-base;
+				left: @caret-width-base;
+				top: -@caret-width-base;
+			}
+
+			&:hover:after {
+				border-top-color: @navbar-default-link-hover-color;
+			}
+	    }
+
+	    // Open drop-down indicator
+		&.open > .dropdown-toggle:after {
+			border-top-color: @navbar-default-link-active-color;
+		}
+
+		@media (min-width: @navbar-breakpoint) {
+
+			/* Show on hover */
+			&-submenu:hover,
+			&.show-on-hover:hover {
+
+				> .dropdown-menu {
+					display: block;
+				}
+			}
+
+			// Sub-menu indicators on hover
+			&-submenu:hover > a:after {
+				border-top-color: transparent;
+				border-left-color: @navbar-default-link-hover-color;
+			}
+		}
+	}
+
+	// Inverse menu style
+	&-inverse {
+
+		.dropdown {
+
+			// Sub-menus drop downs (multi-level menus)
+			&-submenu {
+
+				> a.dropdown-toggle:after,
+				> a.dropdown-toggle:hover:after {
+					border-left-color: @navbar-inverse-link-color;
+				}
+			}
+
+			&-submenu:hover > a:after {
+				border-top-color: transparent;
+				border-left-color: @navbar-inverse-link-hover-color;
+			}
+
+			// Sub-menu indicators
+			&-toggle {
+
+				&:after {
+					position: relative;
+					display: inline-block;
+					content: " ";
+					width: 0;
+					height: 0;
+					border-color: transparent;
+					border-style: solid;
+					border-width: @caret-width-base @caret-width-base 0 @caret-width-base;
+					border-top-color: @navbar-inverse-link-color;
+					margin: ((@line-height-computed - @caret-width-base) / 2) 0 0 @caret-width-base;
+					left: @caret-width-base;
+					top: -@caret-width-base;
+				}
+
+				&:hover:after {
+					border-top-color: @navbar-inverse-link-hover-color;
+				}
+			}
+		}
+
+		// Hover style for sub indicators
+		.open > .dropdown-toggle:after {
+			border-top-color: @navbar-inverse-link-active-color;
+		}
+	}
+
+	// Navbar Right (flip the dropdown direction for last items)
+	&-right {
+
+		@media (min-width: @navbar-breakpoint) {
+			// First level dropdown
+			> li {
+
+				> .dropdown-menu {
+					// Normal for first items
+					left: 0;
+					right: auto;
+				}
+
+				&:last-child,
+				&:nth-last-child(2) {
+
+					// Right align edge for last two items
+					> .dropdown-menu {
+						left: auto;
+						right: 0;
+					}
+
+					// Second level dropdown (sub-sub menu)
+					.dropdown-submenu {
+						position: relative;
+
+						> a.dropdown-toggle {
+							padding-left: 20px;
+						}
+
+						> .dropdown-menu {
+							// Fly out to the left, away from the browser edge.
+							left: auto;
+							right: 100%;
+							margin-left: 0;
+							margin-right: -1px;
+						}
+
+						@media (min-width: @navbar-breakpoint) {
+
+							> a.dropdown-toggle:after,
+							> a.dropdown-toggle:hover:after {
+								border-width: @caret-width-base @caret-width-base @caret-width-base 0;
+								border-right-color: @navbar-default-link-color;
+								margin: -(@caret-width-base - 1) 0 0 2px;
+								top: 50%;
+								left: (@caret-width-base * 2);
+								right: auto;
+							}
+
+							// Sub-menu indicators on hover
+							&:hover > a:after {
+								border-right-color: @navbar-default-link-hover-color;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/* Floating Navbar ==========================================================*/
+
+// overlays the content
+.float-navbar {
+
+	#header {
+		margin-top: 0; // no margin offset on floating navbar
+	}
+
+	.navbar-wrapper {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		z-index: 20;
+
+		&.container,
+		&.container-fluid {
+
+			.navbar > .container {
+				width: auto;
+			}
+
+			// Small screens only
+			@media (max-width: @navbar-breakpoint-max) {
+
+				// Clear padding of extra container with small screens
+				padding-left: 0;
+				padding-right: 0;
+			}
+		}
+
+		.navbar {
+
+			// Large screens only
+			@media (min-width: @navbar-breakpoint) {
+
+				border-width: 1px;
+				border-style: none;
+				border-radius: @navbar-border-radius;
+
+				&.navbar-static-top,
+				&.navbar-fixed-top {
+					margin-top: 0;
+				}
+			}
+		}
+	}
+}
+
+/* Navbar Shrink on Scroll ==========================================================*/
+
+body.shrink-nav .navbar-wrapper > .navbar {
+
+	@media (min-width: @navbar-breakpoint) {
+		min-height: @shrink-navbar-height;
+		margin-bottom: @navbar-margin-bottom;
+		box-shadow: 0 0 15px rgba(0,0,0,.15);
+
+		.navbar {
+
+			&-brand {
+
+				@shrink-logo-lineheight: .70; // percentage of navbar height expressed as decimal (1 = 100%, .5 = 50%, etc.)
+				@shrink-logo-padding: (1 - @shrink-logo-lineheight) / 2;
+				padding: ceil(@shrink-navbar-height * @shrink-logo-padding) @navbar-padding-horizontal;
+				line-height: floor(@shrink-navbar-height * @shrink-logo-lineheight);
+
+				img {
+					max-height: floor(@shrink-navbar-height * @shrink-logo-lineheight);
+				}
+			}
+
+			&-nav > li > a {
+				padding-top: @shrink-navbar-padding-vertical;
+				padding-bottom: @shrink-navbar-padding-vertical;
+			}
+
+			&-form {
+				margin-top: ((@shrink-navbar-height - @input-height-base) / 2);
+				margin-bottom: ((@shrink-navbar-height - @input-height-base) / 2);
+			}
+
+			&-btn {
+				margin-top: ((@shrink-navbar-height - @input-height-base) / 2);
+				margin-bottom: ((@shrink-navbar-height - @input-height-base) / 2);
+
+				&.btn-sm {
+					margin-top: ((@shrink-navbar-height - @input-height-small) / 2);
+					margin-bottom: ((@shrink-navbar-height - @input-height-small) / 2);
+				}
+				&.btn-xs {
+					margin-top: ((@shrink-navbar-height - 25) / 2);
+					margin-bottom: ((@shrink-navbar-height - 25) / 2);
+				}
+			}
+
+			&-text {
+				margin-top: ((@shrink-navbar-height - @line-height-computed) / 2);
+				margin-bottom: ((@shrink-navbar-height - @line-height-computed) / 2);
+			}
+
+			&-toggle {
+				margin-top: ((@shrink-navbar-height - 34) / 2);    // Mixin: .navbar-vertical-align(@element-height) | Uses: ((@navbar-height - @element-height) / 2)
+				margin-bottom: ((@shrink-navbar-height - 34) / 2);
+			}
+		}
+
+		// Active item in top navigation
+		& .navbar-nav {
+
+			& > li,
+			& > li.active {
+				padding-top: 0; // removes extra padding for for extra large top navigation
+			}
+
+			& > li.active  > a {
+				padding-top: (@shrink-navbar-padding-vertical - 4);
+			}
+		}
+	}
+}
+
+/* In Page Navbars ==========================================================*/
+
+div:not([class*='navbar-wrapper']) {
+
+	> .navbar {
+		min-height: @container-navbar-height;
+		border-width: 1px;
+		margin-bottom: @navbar-margin-bottom;
+
+		.navbar {
+
+			&-brand {
+				font-size: @font-size-large;
+				font-weight: normal;
+				padding: @container-navbar-padding-vertical @navbar-padding-horizontal;
+				line-height: @container-navbar-height - (@container-navbar-padding-vertical * 2);
+				height: @container-navbar-height;
+
+				img {
+					max-height: @container-navbar-height - (@container-navbar-padding-vertical * 2);
+				}
+			}
+
+			&-nav > li > a {
+				padding-top: @container-navbar-padding-vertical;
+				padding-bottom: @container-navbar-padding-vertical;
+			}
+
+			&-form {
+				margin-top: ((@container-navbar-height - @input-height-base) / 2);
+				margin-bottom: ((@container-navbar-height - @input-height-base) / 2);
+			}
+
+			&-btn {
+				margin-top: ((@container-navbar-height - @input-height-base) / 2);
+				margin-bottom: ((@container-navbar-height - @input-height-base) / 2);
+
+				&.btn-sm {
+					margin-top: ((@container-navbar-height - @input-height-small) / 2);
+					margin-bottom: ((@container-navbar-height - @input-height-small) / 2);
+				}
+				&.btn-xs {
+					margin-top: ((@container-navbar-height - 25) / 2);
+					margin-bottom: ((@container-navbar-height - 25) / 2);
+				}
+			}
+
+			&-text {
+				margin-top: ((@container-navbar-height - @line-height-computed) / 2);
+				margin-bottom: ((@container-navbar-height - @line-height-computed) / 2);
+			}
+
+			&-toggle {
+				margin-top: ((@container-navbar-height - 34) / 2);    // Mixin: .navbar-vertical-align(@element-height) | Uses: ((@navbar-height - @element-height) / 2)
+				margin-bottom: ((@container-navbar-height - 34) / 2);
+			}
+		}
+
+		// @media (min-width: @grid-float-breakpoint) {
+		@media (min-width: @navbar-breakpoint) {
+
+			.navbar-nav {
+
+				& > li,
+				& > li.active {
+					padding-top: 0; // removes extra padding for for extra large top navigation
+				}
+			}
+		}
+	}
+}
+
+/* Container: Section =======================================================*/
+
+.section {
+
+	// Wrapper sections with top/bottom padding (the main layout rows)
+	&-wrapper {
+		&:extend(.clearfix all);
+		max-width: 100%;
+		padding-top: @grid-gutter-width;
+		padding-bottom: @grid-gutter-width;
+
+		// Clear these paddings for Beaver Builder plugin (they're added later to .fl-row-content-wrap instead)
+		.caliber-bb &.fl-row {
+			padding-top: 0;
+			padding-bottom: 0;
+
+		}
+
+		@media (min-width: @screen-lg-min) {
+			padding-top: @jumbotron-padding;
+			padding-bottom: @jumbotron-padding;
+		}
+
+		// Title container used on FrontEnd Editor pages
+		&.title-only {
+			padding-bottom: 0;
+		}
+
+		// No header situations, where another container comes first but inside the #middle container.
+		.no-header #middle > &:first-child,
+		.navbar-wrapper + #middle > &:first-child {
+
+			// Large containers and up... use 50% top padding on first .section-wrapper
+			@media (min-width: @screen-lg-min) {
+				&:not([class*='post-gallery']):not([class*='no-padding']) {
+					padding-top: ceil(@jumbotron-padding / 2);
+
+					&.post-audio:not([class*='show-author']) {
+						padding-bottom: ceil(@jumbotron-padding / 2);
+					}
+				}
+			}
+
+		}
+
+		&.flush {
+
+			&-right {
+				padding-right: 0;
+
+				@media (min-width: @grid-float-breakpoint) {
+					.container-xl {
+						padding-right: 0;
+					}
+				}
+			}
+
+			&-left {
+				padding-left: 0;
+
+				@media (min-width: @grid-float-breakpoint) {
+					.container-xl {
+						padding-left: 0;
+					}
+				}
+			}
+		}
+
+		// Gallery Post as Header (but inside #Middle container)
+		&.post-gallery.post-header {
+			background-color: @gray;
+			padding-top: 25px;
+
+			@media (max-width: @screen-xs-max) {
+				padding-bottom: 25px;
+			}
+
+			@media (max-width: @screen-sm-max) {
+				padding-bottom: 40px;
+			}
+
+			@media (min-width: @screen-sm-min) {
+				padding-top: 40px;
+			}
+
+			@media (min-width: @screen-md-min) {
+				padding-top: 50px;
+			}
+		}
+
+		// Audio Post as Header (but inside #Middle container)
+		&.post-audio {
+			text-align: center;
+			background-color: @gray-light;
+			position: relative;
+
+			.featuredBlur {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+
+				.blurImage {
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					background-position: 50%;
+					background-repeat: no-repeat;
+					background-size: cover;
+					-webkit-filter: blur(12px) grayscale(.2) brightness(.75);
+					filter: blur(12px) grayscale(.2) brightness(.75);
+					-webkit-transform: translate3d(0,0,0) scale(1.075);
+					transform: translate3d(0,0,0) scale(1.075);
+					.transition(background-image 0.3s ease 0s);
+				}
+			}
+		}
+
+		// Post Header (inside #Middle container, but acts like a header)
+		&.post-header {
+
+			&.show-author {
+				padding-bottom: 72px;
+
+				& + .section-wrapper {
+					padding-top: 72px;
+				}
+			}
+
+
+			// Special padding for Audio headers at sizes below 500px
+			@media (max-width: 600px) { // 500 + (min top padding) + (min top padding)
+				&.post-audio {
+					padding-top: 0;
+					padding-bottom: 0;
+				}
+			}
+
+			// Video header padding adjustments
+			&.post-video {
+				padding-bottom: 0;
+			}
+
+			// Smaller than the large screen
+			@media (max-width: @screen-sm-max) {
+
+				&.post-video {
+					padding-top: 0;
+				}
+
+			}
+
+			// Large screens only
+			@media (min-width: @screen-lg-min) {
+				padding-top: 72px;
+				padding-bottom: 72px;
+
+				& + .section-wrapper {
+					padding-top: 72px;
+				}
+
+				&:not([class*='show-author']) + .section-wrapper {
+					padding-top: ceil(@jumbotron-padding / 2);
+				}
+			}
+
+			// Extra large screens
+			@media (min-width: 1300px) {
+
+				&.show-author + .section-wrapper {
+					padding-top: @jumbotron-padding;;
+				}
+
+				&:not([class*='show-author']) + .section-wrapper {
+					padding-top: 72px;
+				}
+			}
+		}
+
+		// .section-wrapper.no-padding-{x,y}-{t,b,l,r} Custom container padding settings
+		&.no-padding {
+
+			// No vertical padding
+			&-y {
+				padding-top: 0;
+				padding-bottom: 0;
+
+				// No top padding
+				&-t {
+					padding-top: 0;
+				}
+				// No bottom padding
+				&-b {
+					padding-bottom: 0;
+				}
+			}
+
+			// No horizontal padding
+			&-x {
+
+				.fluid-width {
+					padding-left: 0;
+					padding-right: 0;
+					width: auto;
+				}
+
+				.container {
+					padding-left: 0;
+					padding-right: 0;
+				}
+				// No left padding
+				&-l {
+
+					.fluid-width {
+						padding-left: 0;
+						width: auto;
+					}
+
+					.container {
+						padding-left: 0;
+					}
+
+				}
+				// No left padding
+				&-r {
+
+					.fluid-width {
+						padding-right: 0;
+						width: auto;
+					}
+
+					.container {
+						padding-right: 0;
+					}
+				}
+			}
+		}
+	}
+}
+
+/* Container: Defaults ======================================================*/
+
+.container {
+
+	// Max width for fluid same as normal container
+	&-fluid {
+		max-width: @container-lg;
+	}
+
+	// Browser width container
+	&-browser {
+		max-width: 100%;
+		// + 25px padding (we normally gets this from the column, but flex columns have no default padding)
+		padding-left: floor(@grid-gutter-width / 2);
+		padding-right: floor(@grid-gutter-width / 2);
+	}
+
+	// Content container with no max-width, works well inside .section-wrapper
+	&-xl {
+		&:extend(.clearfix all);
+		max-width: 100%;
+
+		@media (max-width: @screen-md-max) {
+			padding-left: floor(@grid-gutter-width / 2);
+			padding-right: floor(@grid-gutter-width / 2);
+
+			&.no-padding {
+				padding-left: 0;
+				padding-right: 0;
+			}
+		}
+
+		@media (min-width: @grid-float-breakpoint) {
+			#top & {
+				max-width: 100%;
+			}
+		}
+
+		@media (min-width: @screen-lg-min) {
+			width: @container-large-desktop;
+			margin-left: auto;
+			margin-right: auto;
+			padding-left: floor(@grid-gutter-width / 2);
+			padding-right: floor(@grid-gutter-width / 2);
+
+			// Exceptions to the rule
+			.flush-right & {
+				width: auto;
+				margin-right: 0;
+				padding-right: 0;
+			}
+
+			.flush-left & {
+				width: auto;
+				margin-left: 0;
+				padding-left: 0;
+			}
+
+			.no-padding&,
+			.no-padding & {
+				width: auto;
+				padding-left: 0;
+				padding-right: 0;
+			}
+		}
+
+		// @media (min-width: @screen-lg-min) {
+		@media (min-width: 1332px) {
+			// 1332px = 1130, content max-width (1180-50) / .86, content after padding (1 - padding 7% left - 7% right) + scrollbar (18px)?
+			width: auto;
+			margin-left: 0;
+			margin-right: 0;
+			padding-left: 7%;
+			padding-right: 7%;
+		}
+
+		& > .container-fluid {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+
+	// Background images
+	&-bg-image {
+		background-repeat: no-repeat;
+		background-position: 50% 50%;
+		background-size: cover;
+	}
+
+	// Vertical Align Content Container
+	&-v-align {
+
+		vertical-align: middle;
+
+		/* ghost element, makes vertical align work. */
+		&:before {
+			content: '';
+			display: inline-block;
+			height: 1px;
+			vertical-align: middle;
+			position: absolute;
+			height: 1px;
+		}
+	}
+
+	// Custom text and image containers
+	// &-text,
+	// &-image {
+	// 	width: 100%;
+	// 	height: 100%;
+	// 	display: table;
+
+	// 	// containers with vertical alignment
+	// 	.panel {
+
+	// 		&-image,
+	// 		&-text {
+	// 			display: table-cell;
+	// 			vertical-align: middle;
+	// 		}
+	// 	}
+	// }
+}
+
+/* Rows: Flexbox ============================================================*/
+
+.flex {
+
+	// flexbox section wrapper
+	&-wrapper {
+
+		&,
+		&.section-wrapper {
+			margin: 0;
+
+			// Reset :before/after pseudo elements on flex containers
+			&:before,
+			&:after {
+				content: none;
+				display: none;
+				clear: none;
+			}
+		}
+
+		// Reset :before/after pseudo elements
+		.flex {
+			&-container,
+			&-container-wrap,
+			&-container-wrap .fl-col-group,
+			&-col,
+			&-col .fl-module,
+			&-col .fl-module-content {
+				&:before,
+				&:after {
+					content: none;
+					display: none;
+					clear: none;
+				}
+			}
+		}
+	}
+
+	// flexbox container
+	&-container {
+
+		&,
+		&-wrap .fl-col-group {
+			-js-display: flex;
+			display: flexbox;
+			display: -webkit-box;
+			display: -moz-box;
+			display: -ms-flexbox;
+			display: -webkit-flex;
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: center;
+			margin: 0;
+		}
+	}
+
+	// Reverse column order (.flex-container.flex-cols-reverse)
+	&-cols-reverse {
+		&, & .fl-col-group  {
+
+			// Only reverse on large screens so we can use this manage alternating content styles
+			@media (min-width: @grid-float-breakpoint) {
+				flex-direction: row-reverse;
+			}
+		}
+	}
+
+	// Column positioning classes (.flex-container.flex-cols-{x, y}-{justify})
+	&-cols {
+
+		// Horizontal position
+		&-x {
+
+			&-start {
+				&, & .fl-col-group  {
+					justify-content: flex-start;
+				}
+			}
+			&-end {
+				&, & .fl-col-group {
+					justify-content: flex-end;
+				}
+			}
+			&-center {
+				&, & .fl-col-group {
+					justify-content: center;
+				}
+			}
+			&-between {
+				&, & .fl-col-group {
+					justify-content: space-between;
+				}
+			}
+			&-around {
+				&, & .fl-col-group {
+					justify-content: space-around;
+				}
+			}
+		}
+
+		// Vertical position
+		&-y {
+
+			&-start {
+				&, & .fl-col-group  {
+					align-items: flex-start;
+				}
+			}
+			&-end {
+				&, & .fl-col-group {
+					align-items: flex-end;
+				}
+			}
+			&-center {
+				&, & .fl-col-group {
+					align-items: center;
+				}
+			}
+			&-baseline {
+				&, & .fl-col-group {
+					align-items: baseline;
+				}
+			}
+			&-stretch {
+				align-items: stretch;
+
+				// Exceptions for Live Editor
+				& .fl-col-group {
+					align-items: stretch;
+
+					.flex-col {
+						-js-display: flex;
+						display: flexbox;
+						display: -webkit-box;
+						display: -moz-box;
+						display: -ms-flexbox;
+						display: -webkit-flex;
+						display: flex;
+						align-self: stretch;
+
+						.fl-col-content {
+							-js-display: flex;
+							display: flexbox;
+							display: -webkit-box;
+							display: -moz-box;
+							display: -ms-flexbox;
+							display: -webkit-flex;
+							display: flex;
+							align-self: stretch;
+							flex-direction: column;
+						}
+					}
+				}
+
+				// Vertical align: Center
+				&.flex-justify-center {
+
+					.flex-col,
+					.fl-col-content {
+						justify-content: center;
+					}
+				}
+				// Vertical align: Top
+				&.flex-justify-start {
+
+					.flex-col,
+					.fl-col-content {
+						justify-content: flex-start;
+					}
+				}
+				// Vertical align: Bottom
+				&.flex-justify-end {
+
+					.flex-col,
+					.fl-col-content {
+						justify-content: flex-end;
+					}
+				}
+			}
+		}
+	}
+
+	// flexbox column (strip out default CSS for floats and stuff)
+	&-col {
+		-webkit-box-flex: 0 1 auto;
+		-moz-box-flex: 0 1 auto;
+		-webkit-flex: 0 1 auto;
+		-ms-flex: 0 1 auto;
+		flex: 0 1 auto; // these should only fill to the max % setting
+
+		& .fl-col-content {
+			-webkit-box-flex: 1 1 auto;
+			-moz-box-flex: 1 1 auto;
+			-webkit-flex: 1 1 auto;
+			-ms-flex: 1 1 auto;
+			flex: 1 1 auto; // we want these to fill completely
+			width: 100%; // stupid IE11
+		}
+
+		& ,
+		& .fl-col-content {
+			float: none;
+			max-width: 100%;
+		}
+
+
+		.flex-wrapper .flex-container-wrap &,
+		.flex-wrapper .flex-container-wrap .fl-col-group & {
+
+			// Column specific vertical positioning
+			&.flex-self-y {
+
+				&-start {
+					align-self: flex-start;
+				}
+				&-end {
+					align-self: flex-end;
+				}
+				&-center {
+					align-self: center;
+				}
+				&-baseline {
+					align-self: baseline;
+				}
+				&-stretch {
+					-js-display: flex;
+					display: flexbox;
+					display: -webkit-box;
+					display: -moz-box;
+					display: -ms-flexbox;
+					display: -webkit-flex;
+					display: flex;
+					align-self: stretch;
+
+					// Exceptions for Live Editor
+					.fl-col-content {
+						-js-display: flex;
+						display: flexbox;
+						display: -webkit-box;
+						display: -moz-box;
+						display: -ms-flexbox;
+						display: -webkit-flex;
+						display: flex;
+						align-self: stretch;
+						flex-direction: column;
+					}
+
+					// Vertical align: Center
+					&.flex-self-justify-center {
+
+						&,
+						.fl-col-content {
+							justify-content: center;
+						}
+					}
+					// Vertical align: Top
+					&.flex-self-justify-start {
+
+						&,
+						.fl-col-content {
+							justify-content: flex-start;
+						}
+					}
+					// Vertical align: Bottom
+					&.flex-self-justify-end {
+
+						&,
+						.fl-col-content {
+							justify-content: flex-end;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/* Live Editor ===================================================*/
+
+// in live editing mode (column helpers)
+.fl-builder-edit {
+
+	// fix for top row controls hidden under navbar
+	body:hover .top-nav {
+		z-index: 1;
+	}
+
+	.fl-col {
+
+		// Empty column containers in editor
+		&.fl-col-highlight {
+			padding-left: 5px;
+			padding-right: 5px;
+		}
+	}
+}
+// column and row adjustments
+.fl-col-group {
+	&:extend(.row);
+
+	// Remove left/right margins on "No Padding" and other custom container settings
+	.container-wrap > .no-padding &,
+	.no-padding-x & {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	.no-padding-x & {
+		margin-left: 0;
+		margin-right: 0;
+
+		// Remove first and last column margins for flush containers
+		& .fl-col {
+
+			&:first-child {
+				padding-left: 0; // first column
+			}
+
+			&:last-child {
+				padding-right: 0; // last column
+			}
+
+			@media (max-width: @grid-float-breakpoint-max) {
+				// Ditch all the padding on columns after the breakpoint
+				padding-left: 0;
+				padding-right: 0;
+			}
+		}
+	}
+	.no-padding-x-l & {
+		margin-left: 0;
+
+		// Remove first column margin for flush container
+		& .fl-col:first-child {
+			padding-left: 0; // first column
+		}
+	}
+	.no-padding-x-r & {
+		margin-right: 0;
+
+		// Remove last column margin for flush container
+		& .fl-col:last-child {
+			padding-right: 0; // last column
+		}
+	}
+}
+.fl-col {
+	padding-left: @grid-gutter-width / 2;
+	padding-right: @grid-gutter-width / 2;
+
+	&.container-portfolio,
+	&.flex-col {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	@media (min-width: @screen-md-min) {
+		&.container-post {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+}
+@media (max-width: 768px) {
+	.fl-col-group .fl-col-small {
+		 max-width: none;
+	}
+}
+// row overlay color styles
+.fl-row-bg-overlay {
+	position: relative;
+
+	&:after {
+		content: '' !important;
+		display: block !important;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 0;
+	}
+}
+html:not([class*='fl-builder-edit']) .fl-row-bg-overlay .container-wrap {
+	position: relative;
+	z-index: 1;
+}
+
+/* Beaver Builder ===========================================================*/
+
+.fl-row-content-wrap {
+	padding-top: @grid-gutter-width;
+	padding-bottom: @grid-gutter-width;
+
+	// If Live Editor (not Beaver Builder) clear padding and default to 0
+	.caliber-le & {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+
+	@media (min-width: @screen-lg-min) {
+		padding-top: @jumbotron-padding;
+		padding-bottom: @jumbotron-padding;
+
+		.caliber-le & {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+	}
+}
+
+.fl-module-posts > div,       //.fl-module-content
+.fl-module-portfolio > div {  // .fl-module-content
+	margin: 0;
+}
+
+.caliber-bb {
+
+	.fl-col {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+/* Buttons ==================================================================*/
+
+.btn,
+button.ninja-forms-field,
+input[type='button'].ninja-forms-field,
+input[type='submit'].ninja-forms-field {
+	text-shadow: none;
+	.transition(all .3s ease 0s);
+	.button-size(@padding-base-vertical; @padding-base-horizontal; @font-size-base; @line-height-base; @border-radius-base);
+	border-width: 0;
+
+	&:hover,
+	&:focus {
+		box-shadow: 0 3px 18px rgba(0,0,0,0.14);
+	}
+
+	&.btn-lg {
+		// line-height: ensure even-numbered height of button next to large input
+		.button-size(@padding-large-vertical; @padding-large-horizontal; @font-size-base; @line-height-large; @border-radius-large);
+	}
+
+	&.btn-sm {
+		// line-height: ensure proper height of button next to small input
+		.button-size(@padding-small-vertical; @padding-small-horizontal; floor(@font-size-small * .95); @line-height-small; @border-radius-small);
+	}
+
+	&.btn-xs {
+		.button-size(@padding-xs-vertical; @padding-xs-horizontal; ceil(@font-size-small * .85); @line-height-small; @border-radius-small);
+	}
+}
+
+// Button Colors
+.btn-primary {
+
+	&:hover,
+	&:focus {
+		background-color: lighten(saturate(@btn-primary-bg, 15%), 5%);
+		border-color: lighten(saturate(@btn-primary-border, 15%), 5%);
+	}
+}
+
+.btn-success {
+
+	&:hover,
+	&:focus {
+		background-color: lighten(saturate(@btn-success-bg, 15%), 5%);
+		border-color: lighten(saturate(@btn-success-border, 15%), 5%);
+	}
+}
+
+.btn-info {
+
+	&:hover,
+	&:focus {
+		background-color: lighten(saturate(@btn-info-bg, 15%), 5%);
+		border-color: lighten(saturate(@btn-info-border, 15%), 5%);
+	}
+}
+
+.btn-warning {
+
+	&:hover,
+	&:focus {
+		background-color: lighten(saturate(@btn-warning-bg, 15%), 5%);
+		border-color: lighten(saturate(@btn-warning-border, 15%), 5%);
+	}
+}
+
+.btn-danger {
+
+	&:hover,
+	&:focus {
+		background-color: lighten(saturate(@btn-danger-bg, 15%), 5%);
+		border-color: lighten(saturate(@btn-danger-border, 15%), 5%);
+	}
+}
+
+// Group / Drop down
+.btn-group, .input-group-btn {
+	position: relative;
+
+	> .btn {
+
+		// Re-calculate the button line height to fix slight cross-browser rendering issues due to fractions not matching.
+		// Without this we have 1px offsets of side-by-side inputs and buttons in some browsers. This is likely caused
+		// by different font sizes in the buttons and inputs.of mixed font sizes.
+		// (sizes should match those in .btn classes above)
+		line-height: floor(@font-size-small * @line-height-base);
+		padding-top: floor((@input-height-base - floor(@font-size-small * @line-height-base) - 2) / 2);
+		padding-top: floor((@input-height-base - floor(@font-size-small * @line-height-base) - 2) / 2);
+
+		&.btn-xs {
+			// this is just the same as above, to prevent defaults from overriding
+			.button-size(@padding-xs-vertical; @padding-xs-horizontal; ceil(@font-size-small * .85); @line-height-small; @border-radius-small);
+		}
+
+		&.btn-sm {
+			line-height: floor(floor(@font-size-small * .95) * @line-height-small);
+			padding-top: floor((@input-height-small - floor(floor(@font-size-small * .95) * @line-height-small) - 2) / 2);
+			padding-top: floor((@input-height-small - floor(floor(@font-size-small * .95) * @line-height-small) - 2) / 2);
+		}
+
+		&.btn-lg {
+			line-height: floor(@font-size-base * @line-height-large);
+			padding-top: floor((@input-height-large - floor(@font-size-base * @line-height-large) - 2) / 2);
+			padding-top: floor((@input-height-large - floor(@font-size-base * @line-height-large) - 2) / 2);
+		}
+
+		&.dropdown-toggle .caret {
+			margin-left: (@caret-width-base * 1.5);
+			margin-right: -(@caret-width-base * 1.5);
+		}
+
+		+ .dropdown-toggle {
+			padding-left: (@input-height-base * .4);
+			padding-right: (@input-height-base * .4);
+			.box-shadow(inset 1px 0 0 @dropdown-border);
+
+			& .caret {
+				margin-left: 0;
+				margin-right: 0;
+			}
+
+			&.btn-xs {
+				padding-left: (@input-height-small * .25);
+				padding-right: (@input-height-small * .25);
+			}
+
+			&.btn-sm   {
+				padding-left: (@input-height-small * .35);
+				padding-right: (@input-height-small * .35);
+			}
+		}
+	}
+
+	.dropdown-menu {
+		border-top-width: 0;
+	}
+
+	&.dropup .dropdown-menu {
+		border-top-width: 1px;
+		border-bottom-width: 0;
+		margin-bottom: 0;
+	}
+
+	.dropdown-toggle {
+
+		&.btn-default ~ .dropdown-menu {
+			background-color: @btn-default-bg;
+			border-color: @btn-default-border;
+
+			> li > a {
+				color: @btn-default-color;
+			}
+
+			> li > a:hover {
+				background-color: darken(@btn-default-bg, 8%);
+			}
+		}
+
+		&.btn-primary ~ .dropdown-menu {
+			background-color: @btn-primary-bg;
+			border-color: @btn-primary-border;
+
+			> li > a {
+				color: @btn-primary-color;
+			}
+
+			> li > a:hover {
+				background-color: darken(@btn-primary-bg, 8%);
+			}
+		}
+
+		&.btn-success ~ .dropdown-menu {
+			background-color: @btn-success-bg;
+			border-color: @btn-success-border;
+
+			> li > a {
+				color: @btn-success-color;
+			}
+
+			> li > a:hover {
+				background-color: darken(@btn-success-bg, 8%);
+			}
+		}
+
+		&.btn-info ~ .dropdown-menu {
+			background-color: @btn-info-bg;
+			border-color: @btn-info-border;
+
+			> li > a {
+				color: @btn-info-color;
+			}
+
+			> li > a:hover {
+				background-color: darken(@btn-info-bg, 8%);
+			}
+		}
+
+		&.btn-warning ~ .dropdown-menu {
+			background-color: @btn-warning-bg;
+			border-color: @btn-warning-border;
+
+			> li > a {
+				color: @btn-warning-color;
+			}
+
+			> li > a:hover {
+				background-color: darken(@btn-warning-bg, 8%);
+			}
+		}
+
+		&.btn-danger ~ .dropdown-menu {
+			background-color: @btn-danger-bg;
+			border-color: @btn-danger-border;
+
+			> li > a {
+				color: @btn-danger-color;
+			}
+
+			> li > a:hover {
+				background-color: darken(@btn-danger-bg, 8%);
+			}
+		}
+	}
+}
+
+/* Typography ===============================================================*/
+
+a {
+	.transition( color 0.2s ease 0s );
+
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+a.more-link {
+	display: inline-block;
+	margin: (@line-height-computed / 2) 0;
+}
+
+p {
+	margin: 0 0 ceil(@line-height-computed * .75);
+
+	// this has potential to have spacing weirdness, but it tends to work, usually.
+	#middle div[class^='container-'] > &:last-child,
+	#middle div[class^='container-'] > .row:last-child &:last-child {
+		margin-bottom: 0;
+	}
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+	margin-bottom: ceil(@line-height-computed * .7);
+	margin-top: 0; // ceil(@line-height-computed * 1.2);
+
+	em {
+		font-style: normal;
+		font-weight: bold;
+		color: @color-accent-3;
+	}
+
+	br + &,
+	p + &,
+	ul + &, ol + &,
+	blockquote + &,
+	span + &,
+	dl + & {
+		margin-top: ceil(@line-height-computed * 1.2);
+	}
+
+	+ .lead {
+		margin-top: -(@line-height-computed / 3);
+	}
+
+	.pre-heading + & {
+		margin-top: 0;
+	}
+
+	.bg-dark & {
+		color: #fff;
+	}
+
+	// this has potential to have spacing weirdness, but it tends to work, usually.
+	div[class^='container-'] > &:last-child, {
+		margin-bottom: 0;
+	}
+}
+
+// Bigger margins on headings in some places
+#header {
+	h1, .h1,
+	h2, .h2,
+	h3, .h3,
+	h4, .h4,
+	h5, .h5,
+	h6, .h6 {
+
+		+ *:not(.lead) {
+			margin-top: ceil(@line-height-computed * 1.5);
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+// Bigger Headings
+.x2 {
+	h1& {
+		font-size: ceil(@font-size-base * pow(1.618, 2.04));
+	}
+	h2& {
+		font-size: ceil(@font-size-base * pow(1.618, 1.4));
+	}
+	h3& {
+		font-size: ceil(@font-size-base * pow(1.618, 1));
+	}
+	h4& {
+		font-size: ceil(@font-size-base * pow(1.618, 0.96));
+	}
+	h5& {
+		font-size: ceil(@font-size-base * pow(1.618, 0.92));
+	}
+	h6& {
+		font-size: ceil(@font-size-base * pow(1.618, 0.88));
+	}
+
+	@media (min-width: @grid-float-breakpoint) {
+
+		h1& {
+			font-size: ceil(@font-size-base * pow(1.618, 2.55));
+		}
+		h2& {
+			font-size: ceil(@font-size-base * pow(1.618, 1.75));
+		}
+		h3& {
+			font-size: ceil(@font-size-base * pow(1.618, 1.25));
+		}
+		h4& {
+			font-size: ceil(@font-size-base * pow(1.618, 1.2));
+		}
+		h5& {
+			font-size: ceil(@font-size-base * pow(1.618, 1.15));
+		}
+		h6& {
+			font-size: ceil(@font-size-base * pow(1.618, 1.1));
+		}
+	}
+}
+
+.masthead,
+.entry-header {
+	h1:extend(h1.x2) {}
+	h2:extend(h2.x2) {}
+	h3:extend(h3.x2) {}
+	h4:extend(h4.x2) {}
+	h5:extend(h5.x2) {}
+	h6:extend(h6.x2) {}
+}
+
+// Lists
+ul,
+ol {
+	margin-bottom: ceil(@line-height-computed * .75);
+
+	// No margins on nested lists
+	ul,
+	ol {
+		margin-bottom: 0;
+	}
+}
+
+// Quoting
+cite {
+	font-style: italic;
+}
+
+blockquote {
+	border: 4px solid @gray-lighter;
+	color: @gray-light;
+	font-style: italic;
+	margin: ceil(@line-height-computed) 0;
+	padding: ceil(@line-height-computed * .75) @line-height-computed;
+
+	&.pull-left ,
+	&.pull-right {
+		border: 0;
+		width: 36%;
+		padding-left: @line-height-computed;
+		padding-right: @line-height-computed;
+		margin-left: @line-height-computed;
+		margin-right: @line-height-computed;
+
+		@media (max-width: @screen-sm-max) {
+			width: 42%;
+		}
+
+		@media (max-width: @grid-float-breakpoint-max) {
+			float: none;
+			width: auto;
+		}
+	}
+
+	&.pull-left {
+		float: left;
+		padding-left: 0;
+		margin-left: 0;
+	}
+
+	&.pull-right {
+		padding-right: 0;
+		margin-right: 0;
+	}
+
+	small {
+		font-size: @font-size-small;
+		font-weight: 300;
+	}
+
+	p:last-child,
+	.entry-content.single & p:last-child {
+		margin-bottom: 0;
+	}
+}
+
+code, pre {
+	text-shadow: none;
+}
+
+pre {
+	text-align: left;
+}
+
+.lead {
+	color: desaturate(lighten(@headings-color, 50%), 5%); // @gray-light;
+	color: rgba(121, 129, 129, 0.65);
+}
+
+// Styled text above headings
+.pre-heading {
+	color: @color-accent-2;
+	font-weight: 600;
+	margin-bottom: 0.9em;
+	text-transform: uppercase;
+}
+
+.page-header,
+.entry-header {
+	border-bottom: 0;
+	margin-top: 0;
+	padding-bottom: 0;
+
+	// Author page
+	body.author & {
+
+		.author-avatar {
+			float: left;
+			margin-right: 24px;
+		}
+
+		.pre-heading {
+			margin: 0 0 5px;
+			padding: 2px 0 0;
+		}
+	}
+
+	h1, h2, h3,
+	.entry-title {
+		font-weight: 200;
+
+		a {
+			color: @headings-color;
+
+			&:hover {
+				color: @link-hover-color;
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+.heading { // also extended to .widget-title
+	color: @gray;
+	font-family: @font-family-sans-serif;
+	font-size: @font-size-small;
+	font-weight: 600;
+	margin-bottom: @line-height-computed;
+}
+
+/* Images ===================================================================*/
+
+img {
+	max-width: 100%;
+	height: auto !important; }
+
+/* Dividers =================================================================*/
+
+hr {
+	margin-top: @line-height-base;
+	margin-bottom: @line-height-base;
+
+	@media (min-width: @grid-float-breakpoint) {
+		margin-top: (@line-height-base * 1.6);
+		margin-bottom: (@line-height-base * 1.6);
+	}
+}
+
+/* Tables ===================================================================*/
+
+table {
+	font-size: @font-size-small;
+}
+
+/* Forms ====================================================================*/
+
+// Re-calculate the input line height to fix slight cross-browser rendering issues due to fractions not matching.
+// Without this we have 1px offsets of side-by-side inputs and buttons in some browsers. This is likely caused
+// by different font sizes in the buttons and inputs.of mixed font sizes.
+.form-control {
+	line-height: ceil(@font-size-base * @line-height-base);
+	padding-top: floor((@input-height-base - floor(@font-size-base * @line-height-base) - 2) / 2);
+	padding-top: floor((@input-height-base - floor(@font-size-base * @line-height-base) - 2) / 2);
+	// These are unrelated to line height, just for styling
+	padding-left: (@input-height-base * .33);
+	padding-right: (@input-height-base * .33);
+	.box-shadow(none);
+
+	// Disabled and read-only inputs
+	&[disabled],
+	&[readonly],
+	fieldset[disabled] & {
+		border-color: @input-bg-disabled;
+	}
+
+	// Inputs on backgrounds
+	.well & {
+		background-color: #fff;
+		border-color: #fff;
+	}
+
+	// Validation state inputs
+	.has-warning &,
+	.has-error &,
+	.has-success &,
+	&:focus,
+	.has-warning &:focus,
+	.has-error &:focus,
+	.has-success &:focus {
+		.box-shadow(none);
+	}
+}
+
+// Feedback states
+.has- {
+
+	&success {
+
+		.form-control {
+			background-color: @state-success-bg;
+			border-color: @state-success-bg;
+		}
+
+		.input-group-addon {
+			background-color: @state-success-text;
+			color: #fff;
+		}
+	}
+
+	&warning {
+
+		.form-control {
+			background-color: @state-warning-bg;
+			border-color: @state-warning-bg;
+		}
+
+		.input-group-addon {
+			background-color: @state-warning-text;
+			color: #fff;
+		}
+	}
+
+	&error {
+
+		.form-control {
+			background-color: @state-danger-bg;
+			border-color: @state-danger-bg;
+		}
+
+		.input-group-addon {
+			background-color: @state-danger-text;
+			color: #fff;
+		}
+	}
+}
+
+.input-sm {
+	padding-left: (@input-height-small * .33);
+	padding-right: (@input-height-small * .33);
+}
+
+.input-lg {
+	padding-left: (@input-height-large * .33);
+	padding-right: (@input-height-large * .33);
+}
+
+label,
+.control-label,
+.help-block,
+.checkbox,
+.radio {
+	font-weight: normal;
+}
+
+// input[type='date'],
+// input[type='datetime-local'],
+// input[type='email'],
+// input[type='file'],
+// input[type='month'],
+// input[type='number'],
+// input[type='password'],
+// input[type='search'],
+// input[type='tel'],
+// input[type='text'],
+// input[type='time'],
+// input[type='url'],
+// input[type='week'],
+input,
+textarea,
+select,
+.nf-fields .field-wrap .ninja-forms-field {
+
+	// &,
+	// .nf-fields &.ninja-forms-field {
+		// gives default .form-control styles to native inputs without extra class
+		&:extend(.form-control);
+	// }
+
+	// gives default large input styles to native inputs without .form-control class
+	&.input-lg:extend(.input-lg) {}
+
+	// gives default small input styles to native inputs without .form-control class
+	&.input-sm:extend(.input-sm) {}
+
+	&:hover,
+	&:focus {
+
+		// &,
+		// .nf-fields &.ninja-forms-field {
+			&:extend(.form-control:focus);
+		// }
+	}
+
+	// Remove browser styling on select
+	outline: none;
+}
+
+textarea {
+
+	&,
+	.nf-fields .textarea-wrap &.ninja-forms-field {
+		height: 200px;
+	}
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+
+	&,
+	.nf-fields .field-wrap &.ninja-forms-field {
+		display: inline-block;
+		width: auto;
+		height: auto;
+	}
+}
+
+button,
+.button,
+input[type='button'],
+input[type='submit'] {
+
+	&,
+	.nf-fields .field-wrap &.ninja-forms-field {
+		&:extend(.btn all); // give default .btn styles to native buttons
+		display: inline-block;
+		width: auto;
+
+		&:focus {
+			outline: none;
+		}
+	}
+}
+
+input[type='submit'],
+.nf-fields .submit-wrap input[type='submit'].ninja-forms-field,
+.edd-submit {
+	// gives default submit buttons primary color
+	&:extend(.btn-primary all);
+}
+
+.help-block {
+	color: @gray-light;
+}
+
+ /* .has-warning .form-control:focus,
+.has-error .form-control:focus,
+.has-success .form-control:focus*/
+.form-control:focus {
+	.box-shadow(none);
+}
+
+/* Blog ====================================================================*/
+
+// Blog Posts List Container
+.container-post {
+	margin-left: 0;
+	margin-right: 0;
+	background: @gray-lighter;
+
+	// Bigger screens only
+	@media (min-width: @screen-md-min) {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	// When paired with a default container element, apply same as "container-xl" styles
+	&.container {
+		width: auto;
+		max-width: 100%;
+
+		@media (min-width: @screen-lg-min) {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+
+	article.post {
+		position: relative;
+
+		// Avatar or Post Format Icon
+		.author-avatar,
+		.post-format-icon {
+			position: absolute;
+			left: 50%;
+			bottom: 0;
+			margin-left: -55px;
+			margin-bottom: -55px;
+			z-index: 101;
+
+			// Bigger screens only
+			@media (min-width: @screen-md-min) {
+				top: 50%;
+				bottom: auto;
+				margin-top: -55px;
+				margin-bottom: 0;
+			}
+
+		}
+	}
+
+	// post list content and image sections (alternates left/right)
+	.section {
+
+		&-post-content,
+		&-post-thumbnail {
+			vertical-align: middle;
+			text-align: left;
+			max-width: 100%;
+
+			// Bigger screens only
+			@media (min-width: @screen-md-min) {
+				display: inline-block;
+				width: 50%;
+			}
+		}
+
+		&-post-content {
+			margin: 75px 0 50px;
+			position: relative;
+			z-index: 1;
+
+			// Smaller screens only
+			@media (max-width: @screen-sm-max) {
+
+				// sections with ".no-padding-x" class we need to add back standard ".row" padding.
+				.no-padding-x &,
+				.caliber-bb .fl-row-browser-width & {
+					padding-left: (floor(@grid-gutter-width / 2));
+					padding-right: (floor(@grid-gutter-width / 2));
+
+				}
+			}
+
+			// Bigger screens only
+			@media (min-width: @screen-md-min) {
+				width: 36%;
+				margin: @jumbotron-padding 7%;
+			}
+
+			// Blog post list titles
+			.entry-header {
+				margin-bottom: ceil(@line-height-computed * .7);
+
+				.entry-title:extend(h3.x2) {
+					font-weight: 500;
+					margin-bottom: 4px;
+				}
+			}
+
+			.more-link, .entry-meta {
+				margin-top: @line-height-computed;
+				margin-bottom: 0;
+
+				.meta-nav {
+					padding-left: 0.33em;
+				}
+			}
+
+			// Post meta details
+			.entry-meta {
+				font-style: italic;
+
+				a {
+					color: @text-color;
+				}
+			}
+		}
+
+		&-post-thumbnail {
+			position: relative;
+
+			@media (min-width: @screen-md-min) {
+				position: static;
+			}
+
+			.entry-thumbnail {
+				visibility: hidden;
+
+				&-cover {
+					position: absolute;
+					top: 0;
+					left: -(floor(@grid-gutter-width / 2));
+					right: -(floor(@grid-gutter-width / 2));
+					width: auto;
+					height: 100%;
+					background-color: @gray-light;
+					background-repeat: no-repeat;
+					background-position: 50% 50%;
+					background-size: cover;
+
+					// Smaller screens only
+					@media (max-width: @screen-sm-max) {
+
+						// sections with ".no-padding-x" class we don't offset for default ".row" margins.
+						.no-padding-x &,
+						.caliber-bb .fl-row-browser-width & {
+							left: 0;
+							right: 0;
+						}
+					}
+
+					// Bigger screens only
+					@media (min-width: @screen-md-min) {
+						width: 50%;
+						left: auto;
+						right: auto;
+					}
+				}
+			}
+		}
+	}
+
+	// Alternating posts (reverse image/content positions)
+	.post-alt {
+
+		// Pull content to left
+		.section-post-content {
+
+			// Bigger screens only
+			@media (min-width: @screen-md-min) {
+				left: -50%;
+				position: relative;
+			}
+		}
+
+		// Push image to right
+		.section-post-thumbnail .entry-thumbnail-cover {
+
+			// Bigger screens only
+			@media (min-width: @screen-md-min) {
+				right: 0px;
+			}
+		}
+
+		article.post& .author-avatar {
+			left: auto;
+			right: 50%;
+			margin-right: -55px;
+			margin-left: 0;
+		}
+	}
+}
+
+// Blog post list titles
+.entry-header {
+	margin-bottom: ceil(@line-height-computed * 1.2);
+
+	.entry-title {
+		margin-top: 0;
+		margin-bottom: 12px;
+	}
+}
+
+// Post meta details (top of post)
+.entry-meta {
+	font-size: @font-size-small;
+
+	.sep {
+		color: @gray-light;
+		padding: 0 0.33em;
+	}
+
+	a {
+		color: @gray-light;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+// Post meta details (post footer)
+.post-meta-info {
+
+	.meta-links {
+		font-size: @font-size-small;
+	}
+
+	&.widget:last-child {
+
+		@media (min-width: @screen-md-min) {
+			margin-bottom: 0;
+		}
+
+		p.category-links {
+			margin-bottom: 0;
+		}
+	}
+}
+
+// Avatar and Post Format Icon
+.author-avatar,
+.post-format-icon {
+
+	img {
+		border-radius: 100px;
+	}
+
+	// Avatar in header and Blog Post Lists
+	.container-post &,
+	.masthead & {
+		border-radius: 100px;
+		padding: 5px;
+		width: 110px;
+		height: 110px;
+		background-color: @gray-lighter;
+		overflow: hidden;
+		.transition(all 0.3s ease 0s);
+
+		img,
+		.post-icon {
+			width: 100px;
+			height: 100px;
+			border-radius: 100px;
+		}
+
+		.post-icon {
+			background-color: @gray-light;
+			color: #fff;
+			font-size: 34px;
+			line-height: 98px;
+			text-align: center;
+		}
+	}
+
+	// Avatar in header (like author pages and blog posts)
+	.masthead & {
+		position: absolute;
+		left: 50%;
+		bottom: 0;
+		margin-left: -55px;
+		margin-bottom: -55px;
+		z-index: 101;
+	}
+}
+
+.author-avatar:hover {
+
+	// Avatar in header and Blog Post Lists
+	.container-post &,
+	.masthead & {
+		background-color: #fff;
+		box-shadow: 0 0 32px rgba(0,0,0,.4);
+	}
+}
+
+// Post Formats
+.post.format {
+
+	&-link {
+
+		.entry-title {
+
+			sup {
+				top: -1em;
+				font-size: 14px;
+				color: rgba(0,0,0,.3);
+			}
+		}
+
+		.link-url {
+			font-size: @font-size-small;
+		}
+	}
+
+	&-quote {
+
+		.entry-header {
+			margin-bottom: 0;
+
+			.entry-title {
+				font-size: @font-size-h2;
+				font-weight: 300;
+				margin-bottom: ceil(@line-height-computed * .7);
+			}
+
+			cite {
+				font-weight: 600;
+			}
+		}
+	}
+
+	&-video {
+
+		// Embed media (YouTube/Vimeo/Vine) in list view
+		.section-post-thumbnail .video-container {
+			height: 100%;
+
+			.fluid-width-video-wrapper, iframe {
+				height: 100%;
+			}
+
+			// Vine ("contain" container method)
+			.vine-embed {
+				width: 100%;
+				height: 100%;
+			}
+			// Vine ("cover" background method)
+			// Reference: http://stackoverflow.com/questions/33451481/scale-and-reposition-iframe-like-background-size-cover
+			&.embed_vine_co {
+				overflow: hidden;
+				transform: translate(0);
+
+				.vine-embed {
+					box-sizing: border-box;
+					height: 56.25vw;
+					left: 50%;
+					min-height: 100%;
+					min-width: 100%;
+					transform: translate(-50%, -50%);
+					position: absolute;
+					top: 50%;
+					width: 177.77777778vh;
+				}
+			}
+		}
+
+		// Single page only
+		.video-wrap {
+			position: relative;
+			width: 100%;
+			margin: 0 auto;
+
+			// Vine embeds (we're using 600px max size)
+			.embed_vine_co {
+				padding-top: 100%;
+				position: relative;
+				width: 600px;
+				margin: 0 auto;
+				max-width: 100%;
+
+				// only on screens over 600px
+				@media (min-width: 600px) {
+					padding-top: 600px;
+				}
+
+				.vine-embed {
+					height: 100%;
+					max-height: 600px;
+					position: absolute;
+					top: 0;
+				}
+			}
+
+			// only on large screens
+			@media (min-width: @screen-md-min) {
+				width: 75%;
+				max-width: @screen-lg;
+
+				.embed_vine_co {
+					max-height: 644px;
+				}
+
+			}
+		}
+	}
+
+	&-audio {
+
+		// Embed media (SoundCloud...) in list view
+		.section-post-thumbnail .audio-container {
+			position: absolute;
+			top: 0;
+			height: 100%;
+			width: 100%;
+
+			iframe,
+			iframe[style] {
+				height: 100%;
+				width: 100%;
+			}
+		}
+
+		// Single page only
+		.audio-wrap {
+			display: inline-block;
+			position: relative;
+			margin: 0 auto;
+			background-position: 50%;
+			background-size: cover;
+			background-repeat: no-repeat;
+
+			// embed media
+			.audio-container {
+				position: absolute;
+				top: 0;
+				width: 100%;
+				height: 100%;
+
+				@media (min-width: 500px) {
+					width: 500px;
+					height: 500px;
+				}
+
+				iframe,
+				iframe[style] {
+					width: 100%;
+					height: 100%;
+				}
+			}
+		}
+	}
+
+	&-gallery {
+
+		// Owl Carousel
+		.post-format-gallery.owl-carousel {
+			height: 100%;
+
+			.owl {
+
+				&-stage {
+					height: 100%;
+
+					&-outer {
+						height: 100%;
+					}
+				}
+
+				&-item {
+					height: 100%;
+
+					.item {
+						display: block;
+						height: 100%;
+						background-position: 50%;
+						background-repeat: no-repeat;
+						background-size: cover;
+					}
+
+					img {
+						visibility: hidden;
+					}
+
+					// Don't hide the image when using fast load effect
+					.fast-load-img {
+						visibility: visible;
+					}
+				}
+
+				&-controls {
+					background-color: transparent;
+					height: 72px;
+					line-height: 72px;
+					margin-top: 0;
+					opacity: .6;
+					.transition(all 0.3s ease 0.1s);
+
+					// only big screens
+					@media (min-width: @screen-md-min) {
+						background-color: #000; // #fff;
+						background-color: fade(#000, 30%);
+					}
+
+					.owl-nav {
+						float: right;
+
+						.owl-prev,
+						.owl-next {
+							color: #fff; // #777;
+							background-color: transparent; // @gray-lighter;
+							border-left: 1px solid fade(#fff, 10%); // fade(#000, 10%);
+							font-size: 24px;
+							margin: 0;
+							padding: 0;
+							width: 72px;
+							height: 72px;
+							.transition(all 0.3s ease 0.1s);
+						}
+
+						// only small screens
+						@media (max-width: @screen-sm-max) {
+							display: none;
+						}
+					}
+
+					.owl-dots {
+						top: 0;
+						right: auto;
+						margin: 27px 0 27px 19px;
+						line-height: 1px;
+
+						// only small screens
+						@media (max-width: @screen-sm-max) {
+							right: 0;
+							margin-right: 19px;
+						}
+
+						span {
+							width: 18px;
+							height: 18px;
+							margin: 0 8px;
+							background-color: fade(#fff, 45%); // fade(#000, 20%);
+							.transition(all 0.3s ease 0.1s);
+
+							// only small screens
+							@media (max-width: @screen-sm-max) {
+								.box-shadow(0 0 5px fade(#000, 30%));
+								width: 14px;
+								height: 14px;
+							}
+						}
+
+						.owl-dot.active span,
+						.owl-dot:hover span {
+							background-color: #fff;
+
+							// only small screens
+							@media (max-width: @screen-sm-max) {
+								.box-shadow(0 0 10px fade(#000, 60%));
+							}
+						}
+					}
+				}
+			}
+
+			// only big screens
+			@media (min-width: @screen-md-min) {
+
+				&:hover {
+
+					.owl-controls {
+						background-color: fade(#000, 50%); // #fff;
+						opacity: .8;
+
+						.owl-nav {
+
+							.owl-prev,
+							.owl-next {
+
+								&:hover {
+									color: #fff; // #fff;
+									background-color: fade(#000, 50%); // fade(#000, 65%);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		// Single Owl Carousel ".post.format-gallery .post-format-gallery.owl-carousel"
+		.single & .gallery-wrap {
+			padding-top: 50%;
+			position: relative;
+			width: 100%;
+
+			// default size
+			@media (min-width: @screen-sm-min) {
+				padding-top: 36.36%;
+			}
+
+			// max height
+			@media (min-width: @screen-lg-min) {
+				padding-top: 440px;
+			}
+
+			.post-format-gallery {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+
+
+				.owl {
+
+					&-item {
+
+						img {
+							height: 100% !important;
+							max-height: 100% !important;
+							width: auto;
+							visibility: visible;
+							transform: translateZ(0); // prevents image flicker on transition
+						}
+					}
+
+					&-controls {
+						background-color: transparent !important;
+						top: auto;
+						bottom: -72px;
+						display: none;
+
+						// when showing dots only, controls get smaller
+						@media (max-width: @screen-sm-max) {
+							height: 40px;
+							line-height: 40px;
+						}
+
+						// show on bigger screens
+						@media (min-width: @screen-sm-min) {
+							display: block;
+						}
+
+						// only small screens
+						@media (max-width: @screen-sm-max) {
+							.owl-dots {
+
+								// margin: 16px floor(@grid-gutter-width / 2);
+								margin: 13px floor(@grid-gutter-width / 2);
+								right: 0;
+
+								span {
+									width: 14px;
+									height: 14px;
+									.box-shadow(none);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		// Only if we do NOT have author avatar
+		.single .post-gallery:not([class*='show-author']) & .gallery-wrap {
+
+			.post-format-gallery {
+
+				.owl {
+
+					&-controls {
+
+						// only small screens
+						@media (max-width: @screen-md-max) {
+							bottom: -50px;
+							height: 50px;
+							line-height: 50px;
+						}
+
+						.owl-nav {
+
+							.owl-prev,
+							.owl-next {
+
+								// only small screens
+								@media (max-width: @screen-md-max) {
+									width: 50px;
+									height: 50px;
+								}
+							}
+						}
+
+						.owl-dots {
+
+							// only medium screens
+							@media (max-width: @screen-md-max) {
+								margin: 16px floor(@grid-gutter-width / 2);
+							}
+
+							@media (max-width: @screen-sm-max) {
+								margin: 13px floor(@grid-gutter-width / 2);
+							}
+						}
+					}
+				}
+			}
+		}
+		// Only if we DO have author avatar
+		.single .post-gallery.show-author & .gallery-wrap {
+
+			.post-format-gallery {
+
+				.owl {
+
+					&-controls {
+
+						@media (max-width: @screen-sm-max) {
+							bottom: auto;
+							top: -40px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// Post content sections
+.entry-content {
+
+	// increase font sizes a bit on article content (intended for heaving reading, such as on a blog)
+	&.single {
+		font-size: @entry-font-size;
+
+		// Adjust some margins and spacing
+		p,
+		ul,
+		ol {
+			margin-bottom: @line-height-computed;
+		}
+
+		ol, ul {
+
+			li {
+				line-height: floor(@line-height-computed * .85);
+				margin-top: ceil(@line-height-computed * .2);
+				margin-bottom: ceil(@line-height-computed * .2);
+			}
+
+			ol, ul {
+				margin-bottom: 0; // no margins on nested lists
+			}
+		}
+
+		h1, h2, h3, h4, h5, h6,
+		.h1, .h2, .h3, .h4, .h5, .h6 {
+			margin-bottom: ceil(@line-height-computed * .85);
+		}
+
+		blockquote {
+			margin: ceil(@line-height-computed * 1.1) 0;
+			padding: ceil(@line-height-computed * .9) @line-height-computed;
+		}
+	}
+}
+
+// Post footer (comments, author details, meta, etc.)
+.post-footer {
+	background-color: @gray-lighter;
+}
+
+// Author Info
+.author-info {
+	font-size: @font-size-small;
+	margin-bottom: ceil(@line-height-computed * 1.5);
+
+	.author {
+
+		&-avatar {
+			float: left;
+			margin-bottom: 10px;
+		}
+
+		&-name {
+			font-size: 24px;
+			line-height: 30px;
+			margin-left: 70px;
+			margin-bottom: 10px;
+			padding-top: 10px;
+
+			& + p {
+				clear: left;
+			}
+		}
+
+		&-link {
+			font-size: @font-size-small;
+		}
+	}
+}
+
+// Comments
+#comments .comments-title,
+#respond .comment-reply-title {
+	font-size: 28px; // @font-size-h3;
+}
+
+.comments-header {
+	margin-bottom: 24px;
+	margin-top: -5px;
+}
+
+.comment .children {
+	margin-left: 50px;
+	padding-left: 0;
+	list-style: none;
+
+	.panel-body {
+		padding-bottom: 2rem;
+	}
+}
+
+.comment-list {
+
+	.avatar {
+		border-radius: 50px; // @border-radius-base;
+		margin-right: 2rem;
+	}
+
+	.media {
+
+		&-body {
+
+			.panel {
+				position: relative;
+				border: none;
+				border-bottom: 1px solid rgba(0,0,0,.09);;
+				margin-bottom: 2rem;
+				border-radius: 0;
+				.box-shadow(none);
+				background-color: transparent;
+
+				&-heading {
+					background: transparent;
+					border: none;
+					padding: 0; // 0 0 1rem;
+					line-height: 50px;
+					vertical-align: middle;
+
+					.media-heading {
+						font-size: 22px;
+						line-height: 34px;
+						vertical-align: middle;
+
+						@media (min-width: @grid-float-breakpoint) {
+							margin-bottom: 0;
+						}
+
+						a {
+							color: @text-color;
+						}
+					}
+
+					cite {
+						font-style: normal;
+					}
+
+					.says {
+						display: none;
+					}
+				}
+
+				&-body {
+					clear: both;
+					padding: 2rem 0 0;
+
+					p:last-child {
+						margin-bottom: 0;
+					}
+				}
+
+				&-footer {
+					font-size: @font-size-small;
+					margin-bottom: 2rem;
+					padding: 10px 0 0;
+					background: transparent;
+					border: none;
+				}
+			}
+
+			.comment-meta {
+				font-size: (@font-size-small - 1);
+				line-height: @font-size-small;
+
+				a {
+					color: @gray;
+
+					&:hover {
+						color: @gray-dark;
+						text-decoration: none;
+					}
+				}
+			}
+
+			a.comment-edit-link,
+			a.comment-reply-link {
+				color: #fff;
+				background: rgba(0,0,0,.18);
+				border-radius: @border-radius-small;
+				display: inline-block;
+				font-size: 12px;
+				padding: 2px 12px;
+				margin-left: 1rem;
+				line-height: 2rem;
+				text-transform: uppercase;
+				.transition(all 0.3s ease 0s);
+
+				&:hover {
+					color: #fff;
+					background: rgba(0,0,0,.38);
+					text-decoration: none;
+				}
+			}
+
+			a.comment-reply-link {
+				margin-left: 0;
+				position: absolute;
+				top: 13px;
+				right: 0;
+			}
+
+			.edit-link {
+				opacity: 0;
+				position: absolute;
+				right: 0;
+				bottom: -1px;
+				border-bottom-right-radius: 0;
+				border-bottom-left-radius: 0;
+				.transition(opacity 0.38s ease 0.12s);
+			}
+
+			&:hover .edit-link {
+				opacity: 1;
+			}
+		}
+	}
+}
+
+.comment-respond {
+
+	.comment-form {
+
+		// Hide "allowed tags" info
+		.form-allowed-tags-wrapper {
+			display: none;
+		}
+
+		// submit button
+		.form-submit {
+			margin-bottom: 0;
+		}
+
+		// Fields
+		input[type='text'],
+		input[type='email'],
+		input[type='password'],
+		textarea,
+		select {
+			background-color: #fff;
+			border-color: rgba(0,0,0,.08);
+
+			&:hover,
+			&:focus {
+				border-color: rgba(0,0,0,.18);
+			}
+		}
+
+		.comment-subscription-form {
+			margin: 15px 0;
+		}
+
+		@media (min-width: @grid-float-breakpoint) {
+
+			&-author,
+			&-email {
+				float: left;
+				width: 47.5%;
+				margin-bottom: 1rem;
+			}
+
+			&-email {
+				float: right;
+			}
+
+			&-url {
+				clear: both;
+				margin-bottom: 3rem;
+			}
+		}
+
+	}
+}
+
+/* Portfolio ==============================================================*/
+
+.container-portfolio {
+	font-size: 0; // prevents issues with whitespace
+	margin-left: 0;
+	margin-right: 0;
+	padding-left: 0;
+	padding-right: 0;
+
+	// When paired with a default container element, apply same as "container-xl" styles
+	&.container {
+		width: auto;
+		max-width: 100%;
+
+		@media (min-width: @screen-lg-min) {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+}
+
+.portfolio-grid-item {
+	// normal grid (4 items per row)
+	font-size: @font-size-base;
+	display: inline-block;
+	overflow: hidden;
+	position: relative;
+	-webkit-transform: translate3d(0, 0, 0);
+	-moz-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+
+	&:before {
+		content: '';
+		display: block;
+		padding: 100% 100% 0 0;
+		background-color: @color-accent-2;
+	}
+
+	// large grids (1 across)
+	width: 100%;
+	height: 100%;
+
+	@media (min-width: 360px) {
+		// extra large grid  (2 across)
+		.xl-portfolio & {
+			width: 100%;
+			height: 100%;
+		}
+
+		// smaller grid  (2 across)
+		.small-portfolio & {
+			width: 50%;
+			height: 50%;
+		}
+	}
+
+	@media (min-width: @screen-xs-min) {
+		// large grids (2 across)
+		width: 50%;
+		height: 50%;
+	}
+
+	@media (min-width: @screen-sm-min) {
+		// extra large & large grid  (2 across)
+		.xl-portfolio &,
+		.large-portfolio & {
+			width: 50%;
+			height: 50%;
+		}
+
+		// medium & large grid  (3 across)
+		.small-portfolio & {
+			width: 33.3333%;
+			height: 33.333%;
+		}
+	}
+
+	@media (min-width: @screen-md-min) {
+		// large & medium grids (3 across)
+		width: 33.3333%;
+		height: 33.333%;
+
+		// large grid  (3 across)
+		.large-portfolio & {
+			width: 33.3333%;
+			height: 33.333%;
+		}
+
+		// smaller grid  (4 across)
+		.small-portfolio & {
+			width: 25%;
+			height: 25%;
+		}
+	}
+
+	@media (min-width: @screen-lg-min) {
+		// medium grids (4 across)
+		width: 25%;
+		height: 25%;
+
+		// smaller grid  (6 across)
+		.small-portfolio & {
+			width: 16.66667%;
+			height: 16.66667%;
+		}
+	}
+
+	&:hover {
+
+		.item-image {
+			opacity: 0.25;
+		}
+	}
+
+	.item {
+
+		&-content-wrap,
+		&-image {
+			color: #fff;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			text-align: center;
+			.transition(opacity 0.38s ease 0.12s);
+		}
+
+		&-content-wrap {
+			opacity: 0;
+
+			.content-inner {
+				display: table;
+				height: 100%;
+				width: 100%;
+				vertical-align: middle;
+
+				.inner-wrap {
+					display: table-cell;
+					vertical-align: middle;
+					padding: 20px;
+					padding-top: 15px; // 40px; // changes to 0 on hover
+				}
+			}
+
+			&:hover {
+				opacity: 1;
+
+				.item-title {
+					margin-bottom: .25em;
+				}
+			}
+		}
+
+		&-image {
+			background-position: 50% 50%;
+			background-repeat: no-repeat;
+			background-size: cover;
+			opacity: 1;
+
+		}
+
+		&-title {
+			color: #fff;
+			font-size: (@font-size-large + 5);
+			font-weight: 500;
+			margin-top: 0;
+			margin-bottom: 1.75em; // changes to .25em on hover
+			.transition(margin-bottom 0.38s ease-out 0.12s);
+
+			.small-portfolio & {
+				font-size: (@font-size-large + 1);
+			}
+		}
+
+		&-description {
+			color: fade(#fff, 75%);
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+	}
+}
+
+/* Search Page & Results ===================================================*/
+
+body.search {
+
+	// Search input and button
+	.search-page-field .input-group {
+		position: relative;
+		display: table;
+		width: 100%;
+		border-bottom: 2px solid rgba(0,0,0,.15);
+
+		input[name='s'] {
+			float: left;
+			display: table-cell;
+			width: 100%;
+			padding-right: 60px;
+			background: transparent;
+			border: 0;
+			font-size: 32px;
+			line-height: 60px;
+			height: 60px;
+			padding: 0;
+		}
+
+		.input-group-btn {
+			float: right;
+			display: table-cell;
+			width: 50px;
+			margin-left: -50px;
+		}
+
+		button {
+			width: 50px;
+			height: 50px;
+			border: 0;
+			border-radius: 25px;
+			font-size: 18px;
+			line-height: 50px;
+			padding: 0;
+			text-align: center;
+		}
+	}
+
+	// Results formatting
+	.search-result {
+
+		&, &.hentry {
+			margin-bottom: 2em;
+		}
+
+		& h3 {
+			font-size: @font-size-large;
+			margin-bottom: 8px;
+			font-weight: 500;
+		}
+
+	}
+}
+
+/* Error Pages ============================================================*/
+
+.error {
+
+	&-container {
+		text-align: center;
+	}
+
+	&-404 .page-header {
+		border-bottom: 0;
+
+		.page-title {
+			font-size: @font-size-h1;
+		}
+	}
+}
+
+/* Positioning and Other Helpers ==========================================*/
+
+.no-padding {
+
+	&,
+	&.section-wrapper {
+		padding-top: 0;
+		padding-bottom: 0;
+		padding-left: 0;
+		padding-right: 0;
+
+		&-top {
+			padding-top: 0;
+		}
+
+		&-bottom {
+			padding-bottom: 0;
+		}
+
+		&-left {
+			padding-left: 0;
+		}
+
+		&-right {
+			padding-right: 0;
+		}
+	}
+}
+
+/* Paging =================================================================*/
+
+.paging-nav-bottom {
+
+	&,
+	&.section-wrapper {
+		background-color: @gray-dark;
+		padding-top: floor(@grid-gutter-width / 2);
+		padding-bottom: floor(@grid-gutter-width / 2);
+		text-align: center;
+
+		// small screens only
+		@media (max-width: @screen-sm-max) {
+			// Live Editor adjustments
+			.fl-col.container-post & {
+				margin-left: -@grid-gutter-width / 2;
+				margin-right: -@grid-gutter-width / 2;
+
+				// Special padding conditions
+				.no-padding-x & {
+					margin-left: 0;
+					margin-right: 0;
+				}
+				.no-padding-x-l & {
+					margin-left: 0;
+				}
+				.no-padding-x-r & {
+					margin-right: 0;
+				}
+			}
+		}
+
+		.paging {
+			font-size: 0; // no white space
+
+			.pagination {
+				margin: 0 auto;
+
+				& > li {
+					display: inline-block;
+					font-size: @font-size-base;
+					padding: 5px;
+
+					& > a,
+					& > span {
+						width: 40px;
+						height: 40px;
+						line-height: 40px;
+						margin-left: 0;
+						padding: 0;
+						border: none;
+						border-radius: 50px;
+						background-color: transparent;
+						color: @gray-lighter;
+						.transition(all 0.3s ease 0s);
+
+						&:hover,
+						&:focus {
+							color: #fff;
+							background-color: rgba(255,255,255,.1);
+						}
+					}
+
+					&.active {
+						padding: 2px;
+
+						a,
+						a:hover,
+						a:focus,
+						span,
+						span:hover,
+						span:focus {
+							color: @gray-lighter;
+							width: 46px;
+							height: 46px;
+							line-height: 42px;
+							border: 2px solid @gray-dark;
+							border-color: rgba(255,255,255,.2);
+							background-color: transparent;
+						}
+					}
+
+					// small screens only
+					@media (max-width: @screen-sm-max) {
+						margin-left: 3px;
+						margin-right: 3px;
+						padding-left: 2px;
+						padding-right: 2px;
+
+						& > a,
+						& > span {
+							width: 32px;
+							height: 32px;
+							line-height: 32px;
+							margin-top: 4px;
+							margin-bottom: 4px;
+						}
+
+						&.active {
+
+							& > a,
+							& > span {
+								margin-top: 0;
+								margin-bottom: 0;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/* Next / Previous Post Nav */
+.post-nav-bottom {
+	background-color: @gray-dark;
+	padding-top: 0;
+	padding-bottom: 0;
+	height: 100px;
+
+	.post-navigation {
+
+		.pager {
+			position: relative;
+			margin: 0;
+			padding: 0;
+			height: 100px;
+			overflow: hidden;
+
+			.meta-nav {
+				display: block;
+				height: 100px;
+				line-height: 100px;
+				text-align: center;
+
+				// Medium and smaller screens
+				@media (max-width: @screen-md-max) {
+					padding-left: floor(@grid-gutter-width / 2);
+					padding-right: floor(@grid-gutter-width / 2);
+				}
+
+				&-description {
+					display: none;
+
+					@media (min-width: @grid-float-breakpoint) {
+						display: block;
+						position: absolute;
+						top: 0;
+						left: 0;
+						right: 0;
+						.transition(opacity 0.3s ease 0.1s);
+					}
+				}
+
+				&-img {
+					width: 50%;
+					height: 100px;
+					background-position: 50%;
+					background-repeat: no-repeat;
+					background-size: cover;
+					overflow: hidden;
+					position: relative;
+					opacity: 0;
+					.transition(opacity 0.3s ease 0.1s);
+				}
+
+				&-wrap {
+					height: 84px;
+					margin: 8px 0;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					overflow: hidden;
+
+					@media (min-width: @grid-float-breakpoint) {
+						position: absolute;
+					}
+
+					.heading {
+						color: fade(#fff, 25%);
+						font-weight: 800;
+						margin-top: 15px;
+						margin-bottom: 0;
+						opacity: 1;
+						.transition(all 0.3s ease 0.1s);
+					}
+				}
+
+				&-title {
+					color: fade(#fff, 80%);
+					font-size: 20px;
+					line-height: 20px;
+					margin-top: 5px;
+					margin-bottom: 3px;
+				}
+
+				&-excerpt {
+					color: fade(#fff, 40%);
+					font-size: 15px;
+					line-height: 24px;
+					height: 48px;
+					white-space: normal; // becasue we're using multi-line ellipsis
+					overflow: hidden;
+					opacity: 0;
+					display: block;
+					display: -webkit-box;
+					-webkit-line-clamp: 2;
+					-webkit-box-orient: vertical;
+					text-overflow: ellipsis;
+					.transition(all 0.3s ease 0.1s);
+				}
+			}
+
+			.nav {
+
+				&-previous,
+				&-next {
+					display: block;
+					float: left;
+					width: 50%;
+
+					a {
+						position: relative;
+						display: block;
+						margin: 0;
+						padding: 0;
+						width: 100%;
+						height: 100px;
+						line-height: 100px;
+						color: @gray;
+						background-color: transparent;
+						border: none;
+						z-index: 1;
+
+						&:hover {
+							color: @link-hover-color;
+
+							@media (min-width: @grid-float-breakpoint) {
+
+								& + .meta-nav-description {
+									opacity: 1;
+
+									.meta-nav {
+
+										&-img {
+											z-index: 2;
+											opacity: 1;
+										}
+
+										&-wrap {
+
+											.heading{
+												margin-top: -18px;
+												opacity: 0;
+											}
+										}
+
+										&-excerpt {
+											opacity: 1;
+										}
+									}
+								}
+							}
+						}
+
+						i {
+							font-size: 56px;
+							line-height: 100px;
+						}
+					}
+				}
+
+				&-previous {
+					text-align: left;
+
+					// Apply to everything but smallest screens
+					@media (min-width: @grid-float-breakpoint) {
+
+						.meta-nav {
+							float: left;
+
+							&-img {
+								float: right;
+							}
+
+							&-wrap {
+								left: 0;
+								right: 50%;
+								margin-left: 70px;
+								margin-right: @grid-gutter-width;
+							}
+						}
+					}
+
+					// Apply to large screens
+					@media (min-width: @screen-lg) {
+						.meta-nav {
+							text-align: center;
+							width: 14%; // 7% really, doubled since parent container set to 50%
+
+							&-wrap {
+								left: 7%;
+								margin-left: 1px;
+							}
+						}
+					}
+
+				}
+
+				&-next {
+					text-align: right;
+
+					// Apply to everything but smallest screens
+					@media (min-width: @grid-float-breakpoint) {
+
+						.meta-nav {
+							float: right;
+
+							&-img {
+								float: left;
+							}
+
+							&-wrap {
+								left: 50%;
+								right: 0;
+								margin-right: 70px;
+								margin-left: @grid-gutter-width;
+							}
+						}
+					}
+
+					// Apply to large screens
+					@media (min-width: @screen-lg) {
+						.meta-nav {
+							text-align: center;
+							width: 14%; // 7% really, doubled since parent container set to 50%
+
+							&-wrap {
+								right: 7%;
+								margin-right: 1px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/* Login Form =============================================================*/
+
+body.login {
+	background: #eee url('../images/login-background.jpg') no-repeat 50%;
+	background-size: cover;
+}
+
+#login {
+	background: fade(#111, 70%); // rgba(255,255,255,.8);
+	.box-shadow(0 0 10px rgba(0,0,0,.5));
+	max-width: 100%;
+	width: 80%;
+	height: 100%;
+	padding-top: 8%;
+	padding-left: 10%;
+	padding-right: 10%;
+	margin-left: auto;
+	margin-right: auto;
+	display: table;
+
+	@media (min-width: @grid-float-breakpoint) {
+		padding-left: 5%;
+		padding-right: 5%;
+		width: 45%;
+		margin: auto 0 auto auto;
+	}
+
+	h1 {
+		margin: 0;
+		text-align: center;
+
+		a {
+			display: inline-block;
+			height: 100px;
+			width: 100%;
+			max-width: 480px;
+			margin: 0 auto 25px;
+			background-image: url('../images/login-logo.png');
+			-webkit-background-size: contain;
+			background-size: contain;
+			background-position: 50%;
+			background-repeat: no-repeat;
+			text-indent: -9999px;
+			vertical-align: middle;
+
+			@media (min-width: @grid-float-breakpoint) {
+				height: 200px;
+			}
+		}
+	}
+
+	&form, #lostpasswordform {
+		max-width: 330px;
+		padding: 15px 0;
+		margin: 0 auto !important;
+		background: transparent;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+
+		p {
+			margin-bottom: 0;
+		}
+
+		label {
+			color: @gray-light;
+			width: 100%;
+			font-size: 15px;
+		}
+
+		.forgetmenot {
+			margin-bottom: 10px;
+			font-weight: normal;
+			float: none;
+
+			label {
+				line-height: 28px;
+			}
+
+			#rememberme {
+				margin: 0 2px 2px 0;
+
+				&:focus {
+					outline: none;
+				}
+			}
+		}
+
+		input[type="text"], input[type="password"] {
+			height: auto;
+			margin: 2px 6px 16px 0;
+			padding: 6px 16px;
+			font-size: 15px;
+		}
+
+		#user_login {
+			margin-bottom: 5px;
+		}
+
+		#user_pass {
+			margin-bottom: 12px;
+		}
+
+		p.submit {
+			text-align: center;
+
+			input[type="submit"] {
+				float: none;
+				width: 100%;
+				height: auto;
+				.box-shadow(none);
+				.button-size(@padding-base-vertical; @padding-base-horizontal; @font-size-base; @line-height-base; @border-radius-base);
+				.button-variant(#fff; #999; #a0a0a0);
+				text-shadow: none;
+			}
+		}
+	}
+
+	// WordPress login page link styles
+	#nav, #backtoblog {
+		font-size: 16px;
+		max-width: 330px;
+		margin-left: auto !important;
+		margin-right: auto !important;
+		padding: 0;
+
+		a {
+			color: #ccc;
+
+			&:hover {
+				color: #eee;
+			}
+		}
+	}
+
+	#nav {
+		margin-top: 10px;
+
+		@media (min-width: @grid-float-breakpoint) {
+			margin-top: 24px;
+		}
+	}
+
+	// WordPress login page messages
+	.message, #login_error {
+		&:extend(.alert);
+		max-width: 450px;
+		margin: 1em auto;
+		font-weight: 400 !important;
+		border: none;
+
+		a:extend(.alert .alert-link all) {}
+	}
+
+	.message {
+		&:extend(.alert-info);
+	}
+
+	#login_error {
+		&:extend(.alert-danger);
+	}
+
+	// WordPress mobile login class
+	.mobile & {
+		padding: 20px;
+
+		h1 a {
+			width: 100%;
+			margin-bottom: 10px;
+		}
+	}
+}
+
+/* Fast Load Images =======================================================*/
+
+// This uses a technique to quickly load a low resolution blury image as a
+// placeholder until the higher resolution background image can be loaded. Once
+// the higher resolution image is loaded, the blury image fades out.
+.fast-load {
+	max-width: 100%;
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-size: contain;
+
+	&-img {
+		opacity: 1;
+		-webkit-filter: blur(5px);
+		filter: blur(5px);
+		transform: translateZ(0); // make sure nothing hinky happens in sliders, etc.
+		.transition(opacity 0.3s ease 0s);
+
+		// no overflow on blurry image
+		.fast-load > & {
+			overflow: hidden;
+		}
+
+		// hide the fast-load-img on complete, when it's a child element
+		.fast-load.done > & {
+			opacity: 0 !important;
+		}
+
+		// masthead specific
+		.masthead.fast-load & {
+			position: absolute;
+		}
+	}
+
+	// using <div> with style background-image instead of standard <img> tag
+	& > div&-img {
+		width: 100%;
+		max-width: 100%;
+		height: 100%;
+		background-position: 50%;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+}
+
+/* Audio / Video Player ===================================================*/
+
+// Player Element (global styles)
+.jp-container {
+	margin-bottom: @line-height-computed;
+
+	&.jp-state-full-screen {
+		margin-bottom: 0; // no margin in full screen view!
+	}
+
+	// Fill container
+	&.jp-video {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+
+		.jp-jplayer > img {
+			display: none;
+		}
+	}
+
+	.jp-jplayer {
+
+		max-width:100%;
+
+		&.jp-jplayer-video {
+			background-color: #fff;
+			width: 100% !important;
+			height: auto !important;
+			vertical-align: top;
+		}
+
+		& img {
+			max-width:100%;
+			height: auto !important;
+			vertical-align: top;
+		}
+
+		& video {
+			margin-bottom: 0;
+			width: 100% !important;
+			height: auto !important;
+			vertical-align: top;
+		}
+
+		.poster {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-position: 50%;
+			background-repeat: no-repeat;
+			background-size: cover;
+			z-index: 1;
+
+			img {
+				display: none;
+			}
+		}
+	}
+}
+
+// Player Controls (global styles)
+.jp-interface {
+	position: absolute; // relative
+	width:100%;
+	z-index:100;
+	border-radius: 0; // 2px
+	overflow: hidden;
+	bottom: 0;
+	opacity: .65;
+	.transition(opacity 0.3s ease 0.1s);
+
+	&:hover,
+	.entry-thumbnail-cover:hover & {
+		opacity: .8;
+	}
+
+	// Video controls
+	.jp-video.jp-state-playing & {
+		opacity: 0;
+	}
+	.jp-video.jp-state-playing:hover & {
+		opacity: .8;
+	}
+}
+// div.jp-interface {}
+.jp-audio div.jp-interface, .jp-video div.jp-interface {
+	background-color: #fff;
+	border: 0;
+}
+.jp-video div.jp-interface { -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0; }
+.jp-interface,.jp-play,.jp-pause,.seperator-first,.seperator-second, .seperator-third { height: 72px; }
+.jp-controls { list-style-type:none; padding:0; margin:0; }
+.jp-controls li { display:inline; margin:0; }
+.jp-controls button {
+	position: absolute;
+	top: 0;
+	color: #777;
+	background-color: transparent;
+	width: 72px;
+	height: 72px;
+	padding: 0; // 0 0 0 10px;
+	display: inline-block;
+	border: 0; // border-bottom: none;
+	border-radius: 0;
+	font-size: 24px; // 14px;
+	line-height: 72px;
+	text-decoration:none;
+	outline:none;
+	overflow:hidden;
+	z-index: 1;
+	.box-shadow(none);
+	opacity: .5;
+
+	&:hover {
+		color: #fff;
+		background-color: rgba(0,0,0,.65);
+		.box-shadow(none);
+		text-decoration:none;
+		opacity:.8;
+	}
+
+	span {
+		display: block;
+		overflow: hidden;
+		text-indent:-9999px;
+	}
+
+	// button styles
+	&.jp {
+
+		&-play,
+		&-pause {
+			left: 0;
+			text-align: center;
+		}
+
+		&-pause {
+			display:none;
+
+			&:hover {
+				background-position:-33px -30px;
+			}
+		}
+
+		&-mute,
+		&-unmute {
+			right: 72px;
+		}
+		&-unmute {
+
+			i,
+			.fa {
+				text-indent: -.5em;
+			}
+		}
+
+		&-full-screen {
+			right: 144px;
+
+			.fa-compress {
+				display: none;
+
+				// show in full screen
+				.jp-state-full-screen & {
+					display: inline-block;
+				}
+			}
+
+			.fa-expand {
+
+				// hide in full screen
+				.jp-state-full-screen & {
+					display: none;
+				}
+			}
+		}
+
+		// Small screens only
+		@media (max-width: @screen-md-max) {
+			&-mute,
+			&-unmute {
+				display: none !important;
+			}
+
+			&-full-screen {
+				right: 0;
+			}
+		}
+	}
+}
+
+.jp-progress-container,.jp-volume-bar-container {
+	position: absolute;
+	top: 0;
+	height: 72px;
+}
+.jp-progress-container {
+	left: 73px; // 34px;
+	right: 145px; // 92px;
+
+	// Small screens only
+	@media (max-width: @screen-md-max) {
+		right: 0;
+	}
+
+	// Make room for Full Screen button on video player
+	.jp-video & {
+		right: 217px;
+
+		// Small screens only
+		@media (max-width: @screen-md-max) {
+			right: 73px;
+		}
+	}
+}
+.jp-progress,.jp-volume-bar {
+	height:72px;
+	background: #fff;
+}
+.jp-seek-bar {
+	width: 0;
+	height: 72px;
+	cursor: pointer;
+	background: #fff;
+}
+.jp-progress,.jp-seek-bar {
+	background: #fff;
+}
+.jp-play-bar,.jp-volume-bar-value {
+	width:0;
+	height:72px;
+	background: rgba(0,0,0,.2);
+}
+.jp-volume-bar {
+	position:relative;
+	overflow:hidden;
+	width: 72px;
+	cursor:pointer;
+	background: #fff;
+
+	&-container {
+		right: 0;
+		width: 72px;
+
+		.jp-state-muted & {
+			border-left: 1px solid rgba(0,0,0,.1);
+		}
+
+		// Small screens only
+		@media (max-width: @screen-md-max) {
+			display: none; // hide volume indicator
+		}
+	}
+
+	&-value {
+		width: 0;
+	}
+}
+.seperator {
+
+	&-first,
+	&-second,
+	&-third {
+		width: 1px;
+		position: absolute;
+		top: 0;
+		left: 72px;
+		background-color: rgba(0,0,0,.1);
+	}
+
+	&-second {
+		left: auto;
+		right: 144px;
+	}
+
+	&-third {
+		left: auto;
+		right: 216px;
+	}
+
+	.jp-state-playing &-first {
+		background-color: rgba(0,0,0,.2);
+	}
+
+	// Small screens only
+	@media (max-width: @screen-md-max) {
+		&-second {
+			display: none;
+		}
+		&-third {
+			right: 72px;
+		}
+	}
+}
+
+/* volume controls taken over by mobile devices so don't need to see them */
+.no-volume .jp-progress-container { right: 0px; }
+.no-volume .jp-volume-bar-container, .no-volume .seperator-second, .no-volume .jp-mute, .no-volume .jp-unmute { display: none; }
+
+// Styles specific to designated locations in theme design
+.container-post,
+.post-video,
+.post-audio {
+
+	// Container, no margin on post lists
+	.jp-container {
+		margin-bottom: 0;
+	}
+}
+
+// In blog post list only...
+.container-post {
+
+	// Use an effect like background "cover" for video in blog list, but exclude full-screen mode.
+	.jp-video:not([class*='jp-state-full-screen']) .jp-jplayer video {
+		// Sometimes you can get a tiny 1px gap at video top from browser math so we use 101% and 50.5% instead of 100% and 50%.
+		position: absolute;
+		left: 50.25%; // 50%
+		top: 50.25%; // 50%
+		transform: translateX(-50.25%) translateY(-50.25%); // 50%
+		min-height: 100.5%; // 100%
+		max-height: 100.5%; // 100%
+		width: auto !important;
+		height: auto !important;
+	}
+}
+
+// Scale video to fill on blog post lists and other design specific uses
+@supports (object-fit: cover) {
+
+	.container-post {
+
+		.jp-jplayer {
+
+			&.jp-jplayer-video {
+				width: 100% !important;
+				height: 100% !important;
+			}
+
+			& video {
+
+				.container-post .jp-video:not([class*='jp-state-full-screen']) & {
+					width: 100% !important;
+					height: 100% !important;
+					object-fit: cover;
+				}
+			}
+		}
+	}
+}
+
+/* Lightbox ===============================================================*/
+
+// ColorBox Core Styles
+div#colorbox, div#cboxOverlay, div#cboxWrapper { position:absolute; top:0; left:0; z-index:9999; overflow:hidden; }
+div#cboxOverlay { position:fixed; width:100%; height:100%; }
+#colorbox #cboxMiddleLeft, #colorbox #cboxBottomLeft{ clear: left; }
+#colorbox #cboxContent { position:relative; }
+#colorbox #cboxLoadedContent {
+	margin-bottom: 0;
+	overflow:auto;
+	-webkit-overflow-scrolling: touch; }
+#colorbox #cboxTitle { margin:0; }
+#colorbox #cboxLoadingOverlay, #colorbox #cboxLoadingGraphic { position:absolute; top:0; left:0; width:100%; height:100%; }
+#colorbox #cboxPrevious, #colorbox #cboxNext, #colorbox #cboxClose, #colorbox #cboxSlideshow{cursor:pointer;}
+#colorbox .cboxPhoto {
+	float: left;
+	margin:auto;
+	border:0;
+	display:block;
+	max-width:none;
+	-ms-interpolation-mode:bicubic;
+}
+#colorbox .cboxIframe {
+	width:100%;
+	height:100%;
+	display:block;
+	border:0;
+}
+div#colorbox,
+#colorbox #cboxContent,
+#colorbox #cboxLoadedContent {
+	box-sizing:content-box;
+	-moz-box-sizing:content-box;
+	-webkit-box-sizing:content-box;
+}
+
+// Change the following styles to modify the lightbox appearance
+#colorbox #cboxTopLeft, #colorbox #cboxTopCenter, #colorbox #cboxTopRight,
+#colorbox #cboxMiddleLeft, #colorbox #cboxMiddleRight,
+#colorbox #cboxBottomLeft, #colorbox #cboxBottomCenter, #colorbox #cboxBottomRight {
+	background-image: none;
+	width: 1px;
+	height: 1px;
+}
+div#cboxOverlay{
+	background: #494949;
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(221,221,221,0.8) 0%, rgba(57,57,57,0.7) 60%, rgba(0,0,0,0.7) 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(221,221,221,0.8)), color-stop(60%,rgba(57,57,57,0.7)), color-stop(100%,rgba(0,0,0,0.7))); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(221,221,221,0.8) 0%,rgba(57,57,57,0.7) 60%,rgba(0,0,0,0.7) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  rgba(221,221,221,0.8) 0%,rgba(57,57,57,0.7) 60%,rgba(0,0,0,0.7) 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  rgba(221,221,221,0.8) 0%,rgba(57,57,57,0.7) 60%,rgba(0,0,0,0.7) 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  rgba(221,221,221,0.8) 0%,rgba(57,57,57,0.7) 60%,rgba(0,0,0,0.7) 100%); /* W3C */
+}
+div#colorbox {
+	outline:0;
+}
+#colorbox #cboxContent, #colorbox #cboxTitle, #colorbox #cboxCurrent { background: #222; }
+#colorbox #cboxContent {
+	overflow:hidden;
+	padding: 0;
+	margin: 32px 0;
+	-webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0; // border radius
+	-webkit-box-shadow: 0 0 20px rgba(0,0,0,.4); -moz-box-shadow: 0 0 20px rgba(0,0,0,.4); box-shadow: 0 0 20px rgba(0,0,0,.4); // box shadow
+	-webkit-background-clip: padding-box; // smoother borders with webkit
+
+	@media (min-width: @screen-md-min) {
+		margin: 25px;
+	}
+}
+#colorbox #cboxError {padding:50px; border:1px solid #ccc;}
+#colorbox #cboxLoadedContent { margin: 0; }
+#colorbox #cboxTitle {
+	position: absolute;
+	bottom: 0;
+	left: 100px;
+	margin-right: 128px;
+	font-size: 14px;
+	line-height: 23px;
+	min-height: 42px;
+	width: auto;
+	color:#eee;
+	font-weight: 400;
+
+	span {
+		display: block;
+		padding: 8px 35px 11px 30px;
+	}
+}
+#colorbox #cboxCurrent {
+	position: absolute; bottom: 0; left: 0; width: 100px; min-width: 100px; padding: 8px 17px 11px; font-size: 14px; line-height: 23px; text-align: center; color:#aaa; background: #444; }
+#colorbox #cboxSlideshow {position:absolute; bottom:8px; right:35px; color:#0092ef;}
+#colorbox #cboxPrevious, #colorbox #cboxNext, #colorbox #cboxClose {
+	position: absolute; padding:0; width: 32px; height: 32px; overflow: hidden;
+	font-family: FontAwesome; font-size: 18px; line-height: 32px; text-align: center;
+	background: #222; color: #aaa;
+	border: 0;
+	border-radius: 0;
+	outline: none !important;
+	-webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; /* no shadow */
+	-webkit-transition: all 0.1s ease-in-out;
+	   -moz-transition: all 0.1s ease-in-out;
+		 -o-transition: all 0.1s ease-in-out;
+			transition: all 0.1s ease-in-out;
+
+	&:before {
+		text-indent: 0;
+		display: block;
+	}
+}
+#colorbox #cboxPrevious {
+	bottom: 0; right: 64px; left: auto; border-radius: 0;
+
+	&:before {
+		content:"\f053";
+	}
+}
+#colorbox #cboxNext {
+	bottom: 0; right: 32px; left: auto; border-radius: 0;
+
+	&:before {
+		content:"\f054";
+	}
+}
+#colorbox #cboxClose {
+	top: 0; right: 32px; left: auto; border-radius: 0;
+
+	&:before {
+		content:"\f00d";
+	}
+}
+#colorbox #cboxPrevious:hover, #colorbox #cboxNext:hover, #colorbox #cboxClose:hover { background: #444; color: #fff; }
+#colorbox #cboxLoadingOverlay { background:url(../images/lightbox/loading_background.png) no-repeat center center;}
+#colorbox #cboxLoadingGraphic { display: none !important; background:url(../images/lightbox/loading.gif) no-repeat center center;}
+#colorbox #cboxClose:hover { background: #E21D44; }
+
+// Only on small screens
+@media (max-width: @screen-sm-max) {
+
+	// hidden on small screens (hover effects take over on larger screens)
+	#colorbox #cboxTitle,
+	#colorbox #cboxCurrent {
+		opacity: 0;
+		width: 1px;
+		overflow: hidden;
+	}
+
+	// Change size and position of buttons on small screens
+	#colorbox #cboxContent {
+		overflow: visible;
+	}
+	#colorbox #cboxPrevious,
+	#colorbox #cboxNext {
+		width: 50%;
+		bottom: -32px;
+		left: auto;
+		right: auto;
+	}
+	#colorbox #cboxPrevious {
+		left: 0;
+	}
+	#colorbox #cboxNext {
+		right: 0;
+	}
+	#colorbox #cboxClose {
+		top: -32px;
+		right: 0;
+		width: 100%;
+	}
+}
+
+// Hover to show/hide controls and item details
+#cboxTitle,
+#cboxCurrent,
+#cboxPrevious,
+#cboxNext,
+#cboxClose {
+
+	@media (min-width: @screen-lg-min) {
+		#colorbox & {
+			opacity: 0;
+			.transition( opacity 0.3s ease 0.1s );
+		}
+
+		#colorbox #cboxContent:hover & {
+			opacity: 1;
+		}
+	}
+}
+
+
+/* Generic Nav Elements =====================================================*/
+
+.nav {
+	.open > a,
+	.open > a:hover,
+	.open > a:focus {
+		border-color: transparent;
+	}
+
+	&-tabs {
+		> li > a {
+			background-color: @hr-border;
+			color: @text-color;
+			margin-right: 3px;
+		}
+
+		.caret {
+			border-top-color: @text-color;
+			border-bottom-color: @text-color;
+		}
+	}
+
+	&-pills {
+		font-weight: 300;
+	}
+
+	&-justified {
+
+		// Justified 'default' navigation, not tabs or pills style
+		&:not([class*='nav-pills']):not([class*='nav-tabs']) {
+			background: @nav-link-hover-bg;
+			border: 1px solid @nav-tabs-justified-link-border-color;
+			border-radius: @nav-pills-border-radius;
+
+			> li > a {
+				color: @text-color;
+
+				&:hover {
+					background: darken(@nav-link-hover-bg, 5%);
+				}
+			}
+		}
+	}
+}
+
+.breadcrumb {
+	font-size: @font-size-small;
+}
+
+.pagination {
+	border-radius: @border-radius-base;
+
+	&-lg > li > a {
+		padding-left: 22px;
+		padding-right: 22px;
+	}
+
+	&-sm > li > a {
+		padding: 0 5px;
+	}
+}
+
+.pager {
+	font-size: @font-size-small;
+}
+
+/* Indicators ===============================================================*/
+
+.close {
+	opacity: 0.4;
+	text-decoration: none;
+	text-shadow: none;
+
+	&:hover,
+	&:focus {
+		opacity: 1;
+	}
+}
+
+.alert {
+	font-weight: 300;
+	border-width: 2px;
+	border-radius: 0;
+
+	.alert-link {
+		font-weight: normal;
+		color: #fff;
+		text-decoration: underline;
+	}
+
+	a:extend(.alert .alert-link all) {}
+}
+
+.label {
+	font-weight: 600;
+	padding-left: 1em;
+	padding-right: 1em;
+	border-radius: 2em;
+
+	&-default {
+		background-color: @btn-default-bg;
+		color: @btn-default-color;
+	}
+}
+
+/* Progress bars ============================================================*/
+
+.progress {
+	.box-shadow(none);
+	border-radius: 20px;
+	height: 28px;
+
+	&-bar {
+		line-height: 28px;
+	}
+}
+
+/* Panels ===================================================================*/
+
+.dropdown-header {
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size: 10px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.popover {
+	color: #fff;
+	font-size: 12px;
+
+	&-title {
+		border-color: rgba(255,255,255,.1);
+		color: rgba(255,255,255,.65);
+		font-weight: 500;
+	}
+}
+
+.panel {
+	&-heading,
+	&-footer {
+		border-top-right-radius: 0;
+		border-top-left-radius: 0;
+	}
+
+	&-default {
+		.close {
+			color: @text-color;
+		}
+	}
+}
+
+// .modal {
+// 	&-content {
+// 		border-radius: 3px;
+
+// 		@media (min-width: @grid-float-breakpoint) {
+// 			.box-shadow( 0 2px 20px rgba(0, 0, 0, 0.4) );
+// 		}
+// 	}
+
+// 	.close {
+// 		color: @text-color;
+// 	}
+// }
+
+/* Cover ====================================================================*/
+
+html.cover {
+	height: 100%;
+	margin-top: 0 !important; // Because of WP navbar
+}
+
+.cover {
+
+	body,
+	#wrapper {
+		height: 100%;
+		vertical-align: top;
+	}
+
+	body.transparent-nav.page-template-cover {
+
+		#header {
+			padding-top: 0;
+		}
+
+	}
+
+	#header {
+		margin-top: 0;
+
+		&:not(.cover-with-page) {
+			margin-bottom: 0;
+		}
+	}
+
+	#header, &-wrapper {
+		display: table;
+		width: 100%;
+		height: 100%; /* For at least Firefox */
+		min-height: 100%;
+		background-color: @gray;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: 50%;
+	}
+
+	&-container {
+		display: table-cell;
+		color: #fff;
+		text-align: center;
+		vertical-align: middle;
+		width: 100%; /* Must be percentage or pixels for horizontal alignment */
+
+		&.overlay {
+			background-color: rgba(0,0,0,.6);
+			.box-shadow(inset 0 0 100px rgba(0,0,0,.5));
+		}
+	}
+
+	&-inner {
+
+		.page-title {
+			color: #fff;
+		}
+
+		.lead {
+			color: fade(#fff, 70%);
+		}
+	}
+}
+
+/* Widgets ==================================================================*/
+
+.widget-title {
+	&:extend(.heading);
+}
+
+.widget {
+	margin-bottom: ceil(@line-height-computed * 1.5);
+
+	& > ul {
+		&:extend(.list-unstyled);
+	}
+}
+
+// Recent Posts
+.widget_recent_author_entries,
+.widget_recent_entries {
+
+	ul {
+
+		li {
+			margin-top: ceil(@line-height-computed * .4);
+			padding-bottom: ceil(@line-height-computed * .4);
+			border-bottom: 1px solid rgba(0,0,0,.08);
+
+			a {
+				display: block;
+				color: @headings-color;
+				font-size: @font-size-base;
+				line-height: ceil(@font-size-base * 1.35);
+				font-family: @headings-font-family;
+				font-weight: 500;
+
+				&:hover {
+					color: @link-hover-color;
+				}
+			}
+
+			.post-date {
+				color: @gray;
+				font-size: (@font-size-small - 1);
+				line-height: (@font-size-small - 1);
+			}
+		}
+	}
+
+	.author-link {
+		font-size: @font-size-small;
+	}
+}
+// Conductor
+.conductor-widget .page-numbers {
+	&:extend(.pagination all);
+
+	li > span.current {
+		&:extend(.pagination>.active>span);
+	}
+}
+
+/* Plugins ==================================================================*/
+
+// Ninja Forms
+.ninja-forms-field-description {
+
+	&:extend(.help-block);
+}
+
+.ninja-forms-required-items {
+
+	&:extend(.help-block);
+	margin: 1em 0;
+	color: @brand-info;
+}
+
+.ninja-forms-field-error {
+
+	&:extend(.help-block);
+	color: @brand-danger;
+}
+
+// Pre NF 3 errors
+.ninja-forms-error {
+
+	// &:extend(.has-error all);
+	& input[type='text'],
+	& input[type='email'],
+	& input[type='password'],
+	& textarea,
+	& select {
+		// &:extend(.has-error .form-control);
+		border-color: @brand-danger;
+	}
+}
+// .ninja-forms-response-msg {
+
+// 	&:extend(.help-block);
+// 	color: @brand-warning;
+
+// 	&.ninja-forms-error-msg {
+// 		color: @brand-danger;
+// 	}
+
+// 	&.ninja-forms-success-msg {
+// 		color: @brand-success;
+// 	}
+// }
+
+// NF 3+
+.nf-fields .nf-error .ninja-forms-field,
+.nf-fields .nf-error .ninja-forms-field,
+.nf-fields .nf-error .ninja-forms-field {
+	// &:extend(.has-error .form-control);
+	border-color: @brand-danger;
+}
+.nf-fields .nf-error .nf-error-msg {
+	color: @brand-danger;
+	font-size: @font-size-small;
+}
+
+// Minor field styling adjustments (NF 3+)
+.nf-fields {
+
+	// Checkbox with label left/right
+	.label-right,
+	.label-left {
+
+		> input[type=radio],
+		input[type=checkbox] {
+			vertical-align: text-top;
+		}
+	}
+}

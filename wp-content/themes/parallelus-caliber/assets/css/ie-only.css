@@ -1,0 +1,9 @@
+/* fallback support for flex-box grids */
+.flex-col, .flex-col .fl-col-content {
+	float: left;
+}
+.flex-wrapper .flex-container:before, .flex-wrapper .flex-container-wrap:before, .flex-wrapper .flex-container-wrap .fl-col-group:before, .flex-wrapper .flex-col:before, .flex-wrapper .flex-col .fl-module:before, .flex-wrapper .flex-col .fl-module-content:before, .flex-wrapper .flex-container:after, .flex-wrapper .flex-container-wrap:after, .flex-wrapper .flex-container-wrap .fl-col-group:after, .flex-wrapper .flex-col:after, .flex-wrapper .flex-col .fl-module:after, .flex-wrapper .flex-col .fl-module-content:after {
+	clear: both;
+	content: " ";
+	display: table;
+}

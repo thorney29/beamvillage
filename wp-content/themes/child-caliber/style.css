@@ -1,0 +1,72 @@
+/*
+ Theme Name:   Child Caliber
+ Theme URI:    http://example.com/ 
+ Description:  Child of Caliber theme by Parallelus
+ Author:       Tresa Horney
+ Author URI:   http://tresahorney.com
+ Template:     parallelus-caliber
+ Version:      1.0.0
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+ Tags:         light, dark, two-columns, right-sidebar, responsive-layout, accessibility-ready
+
+*/
+/* HTML Styles */
+.home #header {
+  background-position: 20% 0 !important;
+}
+#header.masthead h1 {
+  width: auto;
+  display: table;
+  float: right;
+  margin-top:305px;
+  background: rgba(0, 0, 0, .68);
+  padding: 20px 40px;
+  border-radius: 4px;
+  color: white;
+}
+.section-wrapper { padding-top: 4% !important;padding-bottom: 4% !important; }
+.section-wrapper.no-padding-x-r .fluid-width,
+#ninja_forms_form_21_cont{ 
+    padding: 7% !important;
+}
+.fl-node-570bdeb3b2fc2 .fl-col-content {
+    padding: 25px !important;
+}
+.entry-header {margin-bottom: 0 !important}
+.one-column-wrap,
+.two-column-wrap, 
+.three-column-wrap,
+.four-column-wrap {
+  float:left;
+  margin: 1%;
+}
+.two-column-wrap { 
+  width: 48%;
+}
+.three-column-wrap {width: 26%;}
+.four-column-wrap {
+  width: 20.75%;
+}
+.address.state,
+.address.country,
+.ninja-forms-form-wrap select.list-options {
+  height: 50px;
+}
+a.button {
+  border: 1px solid #1b67aa;
+}
+input.dntplgn_submit_button {
+    margin: 2% auto;
+}
+.nopadding {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.ninja-forms-required-items {
+    margin: 11.75px !important;
+}
+#footer a {
+    color: #ececec !important;
+}
+ 
