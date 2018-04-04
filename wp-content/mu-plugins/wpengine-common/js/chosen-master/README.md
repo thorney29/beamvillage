@@ -2,49 +2,46 @@
 
 Chosen is a library for making long, unwieldy select boxes more user friendly.
 
-- jQuery support: 1.4+
+- jQuery support: 1.7+
 - Prototype support: 1.7+
 
-For documentation, usage, and examples, see:  
-http://harvesthq.github.com/chosen
+For **documentation**, usage, and examples, see:
+http://harvesthq.github.io/chosen/
 
-### Contributing to Chosen
+For **downloads**, see:
+https://github.com/harvesthq/chosen/releases/
 
-Contributions and pull requests are very welcome. Please follow these guidelines when submitting new code.
+### Package managers
 
-1. Make all changes in Coffeescript files, **not** JavaScript files.
-2. For feature changes, update both jQuery *and* Prototype versions
-3. Use `npm install -d` to install the correct development dependencies.
-4. Use `cake build` or `cake watch` to generate Chosen's JavaScript file and minified version.
-5. Don't touch the `VERSION` file
-6. Submit a Pull Request using GitHub.
+Chosen is available through [Bower](https://bower.io/) and [npm](https://www.npmjs.com),
+_however, the package names are not the same_.
 
-### Using CoffeeScript & Cake
-
-First, make sure you have the proper CoffeeScript / Cake set-up in place. We have added a package.json that makes this easy:
+To install with Bower:
 
 ```
-npm install -d
+bower install chosen
 ```
 
-This will install `coffee-script` and `uglifyjs`.
+To install with npm:
 
-Once you're configured, building the JavasScript from the command line is easy:
+```
+npm install chosen-js
+```
 
-    cake build                # build Chosen from source
-    cake watch                # watch coffee/ for changes and build Chosen
-    
-If you're interested, you can find the recipes in Cakefile.
+The compiled files for these packages are automatically generated and stored in a [2nd Chosen repository](https://github.com/harvesthq/chosen-package). No pull requests will be accepted to that repository.
 
+### Contributing to this project
+
+We welcome all to participate in making Chosen the best software it can be. The repository is maintained by only a few people, but has accepted contributions from over 50 authors after reviewing hundreds of pull requests related to thousands of issues. You can help reduce the maintainers' workload (and increase your chance of having an accepted contribution to Chosen) by following the
+[guidelines for contributing](contributing.md).
+
+* [Bug reports](contributing.md#bugs)
+* [Feature requests](contributing.md#features)
+* [Pull requests](contributing.md#pull-requests)
 
 ### Chosen Credits
 
-- Built by [Harvest](http://www.getharvest.com/). Want to work on projects like this? [We’re hiring](http://www.getharvest.com/careers)!
-- Concept and development by [Patrick Filler](http://www.patrickfiller.com/)
+- Concept and development by [Patrick Filler](http://patrickfiller.com) for [Harvest](http://getharvest.com/).
 - Design and CSS by [Matthew Lettini](http://matthewlettini.com/)
-
-### Notable Forks
-
-- [Chosen for MooTools](https://github.com/julesjanssen/chosen), by Jules Janssen
-- [Chosen Drupal 7 Module](http://drupal.org/project/chosen), by Pol Dell'Aiera, Arshad Chummun, Bart Feenstra, Kálmán Hosszu, etc.
-- [Chosen CakePHP Plugin](https://github.com/paulredmond/chosen-cakephp), by Paul Redmond
+- Repository maintained by [@pfiller](http://github.com/pfiller), [@kenearley](http://github.com/kenearley), [@stof](http://github.com/stof), [@koenpunt](http://github.com/koenpunt), and [@tjschuck](http://github.com/tjschuck).
+- Chosen includes [contributions by many fine folks](https://github.com/harvesthq/chosen/contributors).
